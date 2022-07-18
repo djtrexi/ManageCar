@@ -25,6 +25,10 @@ public class Car {
 	@Column(nullable = false)
 	private String color;
 	private LocalDate annoPorduzione;
+	@Column(nullable = false)
+	private boolean isRental;
+	@Column(nullable = false)
+	private boolean isAvailable;
 
 	@ManyToMany
 	@JoinTable(name = "rental", joinColumns = @JoinColumn(name = "codCar"), inverseJoinColumns = @JoinColumn(name = "codClient"))
@@ -36,19 +40,23 @@ public class Car {
 
 	public Car() {}
 
-	public Car(long id, String model, String brand, String color, LocalDate annoPorduzione) {
+	public Car(long id, String model, String brand, String color, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
 		this.annoPorduzione = annoPorduzione;
+		this.isRental = isRental;
+		this.isAvailable = isAvailable;
 	}
 
-	public Car(String model, String brand, String color, LocalDate annoPorduzione) {
+	public Car(String model, String brand, String color, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
 		this.annoPorduzione = annoPorduzione;
+		this.isRental = isRental;
+		this.isAvailable = isAvailable;
 	}
 
 	public long getId() {
@@ -89,5 +97,21 @@ public class Car {
 
 	public void setAnnoPorduzione(LocalDate annoPorduzione) {
 		this.annoPorduzione = annoPorduzione;
+	}
+
+	public boolean isRental() {
+		return isRental;
+	}
+
+	public void setRental(boolean isRental) {
+		this.isRental = isRental;
+	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 }
