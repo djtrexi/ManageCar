@@ -13,5 +13,5 @@ import com.example.demo.model.Worker;
 @Repository
 public interface WorkerRepository extends JpaRepository<Worker, Long>{
 	@Query("SELECT w FROM Worker w WHERE w.email = ?1 AND w.password = ?2")
-	public Client login(String email, String password);
+	public Worker login(String email, String password);
 }
