@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Car {
@@ -31,10 +33,18 @@ public class Car {
 	private boolean isRental;
 	@Column(nullable = false)
 	private boolean isAvailable;
+	@Column(nullable = false)
+	private LocalDate dateAvalableStart;
+	@Column(nullable = false)
+	private LocalDate dateAvalableFinish;
+	private LocalDate dateRentalStart;
+	private LocalDate dateRentalFinish;
+	@Column(nullable = false)
+	private double moneyDaily;
 
-	@ManyToMany
-	@JoinTable(name = "rental", joinColumns = @JoinColumn(name = "codCar"), inverseJoinColumns = @JoinColumn(name = "codClient"))
-	private List<Client> clients = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codClient")
+	private Client client;
 
 	@ManyToMany
 	@JoinTable(name = "manage", joinColumns = @JoinColumn(name = "codCar"), inverseJoinColumns = @JoinColumn(name = "codWorker"))
@@ -42,7 +52,7 @@ public class Car {
 
 	public Car() {}
 
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvakabkeFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, Client client, List<Worker> workers) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
@@ -51,9 +61,17 @@ public class Car {
 		this.annoPorduzione = annoPorduzione;
 		this.isRental = isRental;
 		this.isAvailable = isAvailable;
+		this.dateAvalableStart = dateAvalableStart;
+		this.dateAvalableFinish = dateAvakabkeFinish;
+		this.dateRentalStart = dateRentalStart;
+		this.dateRentalFinish = dateRentalFinish;
+		this.moneyDaily = moneyDaily;
+		this.client = client;
+		this.workers = workers;
 	}
 
-	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvakabkeFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, Client client) {
+		this.id = id;
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
@@ -61,6 +79,27 @@ public class Car {
 		this.annoPorduzione = annoPorduzione;
 		this.isRental = isRental;
 		this.isAvailable = isAvailable;
+		this.dateAvalableStart = dateAvalableStart;
+		this.dateAvalableFinish = dateAvakabkeFinish;
+		this.dateRentalStart = dateRentalStart;
+		this.dateRentalFinish = dateRentalFinish;
+		this.moneyDaily = moneyDaily;
+		this.client = client;
+	}
+
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvakabkeFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily) {
+		this.model = model;
+		this.brand = brand;
+		this.color = color;
+		this.numberCar = numberCar;
+		this.annoPorduzione = annoPorduzione;
+		this.isRental = isRental;
+		this.isAvailable = isAvailable;
+		this.dateAvalableStart = dateAvalableStart;
+		this.dateAvalableFinish = dateAvakabkeFinish;
+		this.dateRentalStart = dateRentalStart;
+		this.dateRentalFinish = dateRentalFinish;
+		this.moneyDaily = moneyDaily;
 	}
 
 	public long getId() {
@@ -127,19 +166,59 @@ public class Car {
 		this.numberCar = numberCar;
 	}
 
-	public List<Client> getClients() {
-		return clients;
-	}
-
-	public void setClients(List<Client> clients) {
-		this.clients = clients;
-	}
-
 	public List<Worker> getWorkers() {
 		return workers;
 	}
 
 	public void setWorkers(List<Worker> workers) {
 		this.workers = workers;
+	}
+
+	public LocalDate getDateAvalableStart() {
+		return dateAvalableStart;
+	}
+
+	public void setDateAvalableStart(LocalDate dateAvalableStart) {
+		this.dateAvalableStart = dateAvalableStart;
+	}
+
+	public LocalDate getDateAvakabkeFinish() {
+		return dateAvalableFinish;
+	}
+
+	public void setDateAvakabkeFinish(LocalDate dateAvakabkeFinish) {
+		this.dateAvalableFinish = dateAvakabkeFinish;
+	}
+
+	public LocalDate getDateRentalStart() {
+		return dateRentalStart;
+	}
+
+	public void setDateRentalStart(LocalDate dateRentalStart) {
+		this.dateRentalStart = dateRentalStart;
+	}
+
+	public LocalDate getDateRentalFinish() {
+		return dateRentalFinish;
+	}
+
+	public void setDateRentalFinish(LocalDate dateRentalFinish) {
+		this.dateRentalFinish = dateRentalFinish;
+	}
+
+	public double getMoneyDaily() {
+		return moneyDaily;
+	}
+
+	public void setMoneyDaily(double moneyDaily) {
+		this.moneyDaily = moneyDaily;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 }

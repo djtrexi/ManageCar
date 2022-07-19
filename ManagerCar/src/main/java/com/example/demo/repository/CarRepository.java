@@ -19,7 +19,7 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	@Query("SELECT c FROM Car c WHERE c.isAvailable = true")
 	public List<Car> viewAllCarAvailable();
 	
-	@Query("SELECT c FROM Car c WHERE c.isAvailable = true AND c.isRental = false")
+	@Query("SELECT c FROM Car c WHERE c.isAvailable = true AND c.isRental = false AND c.dateRentalFinish < NOW() AND c.dateRentalStart IS NULL AND c.dateRentalFinish IS NULL")
 	public List<Car> viewCarForTheRental();
 	
 	@Query("SELECT c.id FROM Car c WHERE c.numberCar = ?1")

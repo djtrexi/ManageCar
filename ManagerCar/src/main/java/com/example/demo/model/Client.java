@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Client {
@@ -24,17 +23,26 @@ public class Client {
 	@Column(nullable = false, unique = true)
 	private String phone;
 
-	@ManyToMany(mappedBy = "clients")
-	private List<Car> Cars = new ArrayList<>();
+	@OneToMany(mappedBy = "client")
+	private List<Car> cars;
 
 	public Client() {}
 
-	public Client(long id, String name, String surname, String email, String phone) {
+	public Client(long id, String name, String surname, String email, String phone, List<Car> cars) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
+		this.cars = cars;
+	}
+
+	public Client(String name, String surname, String email, String phone, List<Car> cars) {
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.phone = phone;
+		this.cars = cars;
 	}
 
 	public Client(String name, String surname, String email, String phone) {
@@ -85,6 +93,10 @@ public class Client {
 	}
 
 	public List<Car> getCars() {
-		return Cars;
+		return cars;
+	}
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
 	}
 }
