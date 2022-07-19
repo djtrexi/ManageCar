@@ -24,6 +24,8 @@ public class Car {
 	private String brand;
 	@Column(nullable = false)
 	private String color;
+	@Column(nullable = false, unique = true)
+	private String numberCar;
 	private LocalDate annoPorduzione;
 	@Column(nullable = false)
 	private boolean isRental;
@@ -40,20 +42,22 @@ public class Car {
 
 	public Car() {}
 
-	public Car(long id, String model, String brand, String color, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
+		this.numberCar = numberCar;
 		this.annoPorduzione = annoPorduzione;
 		this.isRental = isRental;
 		this.isAvailable = isAvailable;
 	}
 
-	public Car(String model, String brand, String color, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable) {
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
+		this.numberCar = numberCar;
 		this.annoPorduzione = annoPorduzione;
 		this.isRental = isRental;
 		this.isAvailable = isAvailable;
@@ -113,5 +117,29 @@ public class Car {
 
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
+	}
+
+	public String getNumberCar() {
+		return numberCar;
+	}
+
+	public void setNumberCar(String numberCar) {
+		this.numberCar = numberCar;
+	}
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+	}
+
+	public List<Worker> getWorkers() {
+		return workers;
+	}
+
+	public void setWorkers(List<Worker> workers) {
+		this.workers = workers;
 	}
 }

@@ -22,9 +22,6 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	@Query("SELECT c FROM Car c WHERE c.isAvailable = true AND c.isRental = false")
 	public List<Car> viewCarForTheRental();
 	
-	@Query("SELECT c FROM Car c WHERE c.id = ?1")
-	public boolean modifyCar(long id);
-	
-	@Query("SELECT c FROM Car c WHERE c.id = ?1")
-	public boolean deleteCar(long id);
+	@Query("SELECT c.id FROM Car c WHERE c.numberCar = ?1")
+	public long getIdOfCarByNumberCar(String numberCar);
 }
