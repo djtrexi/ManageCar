@@ -8,6 +8,6 @@ import com.example.demo.model.Client;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long>{
-	@Query("SELECT c FROM Client c WHERE c.email = ?1")
+	@Query("SELECT c FROM Client c WHERE c.email = ?1 OR c.phone ? ?2")
 	public Client LoginRental(Client c);
 }
