@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.demo.model.Car;
 
 public class CarPrintResponse {
-	private List<CarDTO> c;
+	private List<CarDTOPrint> c;
 
 	public CarPrintResponse() {}
 
@@ -14,15 +14,15 @@ public class CarPrintResponse {
 		c = new ArrayList<>();
 
 		for(int i = 0; i < listCars.size(); i++) {
-			c.add(new CarDTO(listCars.get(i)));
+			c.add(new CarDTOPrint(listCars.get(i)));
 		}
 	}
 
-	public List<CarDTO> getC() {
+	public List<CarDTOPrint> getC() {
 		return c;
 	}
 
-	public void setC(List<CarDTO> c) {
+	public void setC(List<CarDTOPrint> c) {
 		this.c = c;
 	}
 }
