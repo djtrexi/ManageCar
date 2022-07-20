@@ -182,11 +182,11 @@ public class Car {
 		this.dateAvalableStart = dateAvalableStart;
 	}
 
-	public LocalDate getDateAvakabkeFinish() {
+	public LocalDate getDateAvalableFinish() {
 		return dateAvalableFinish;
 	}
 
-	public void setDateAvakabkeFinish(LocalDate dateAvakabkeFinish) {
+	public void setDateAvalableFinish(LocalDate dateAvakabkeFinish) {
 		this.dateAvalableFinish = dateAvakabkeFinish;
 	}
 
