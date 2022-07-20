@@ -1,0 +1,17 @@
+[
+	{
+    	"model":"Panda 500",
+    	"brand":"Fiat",
+    	"color":"white",
+    	"numberCar":"AAA99AA",
+   	 	"annoProduzione":"2002-08-22",
+    	"dateAvalableStart":"2022-10-05",
+    	"dateAvalableFinish":"2023-04-01",
+    	"rental":false,
+    	"available":true,
+    	"moneyDaily":20.0
+	},
+	{
+    	"id":1
+	}
+]
