@@ -100,7 +100,7 @@ public class CarAddRequest {
 
 	@JsonIgnore
 	public boolean isValidValue() {
-		if(model.equals("") || brand.equals("") || color.equals("") || numberCar.equals("") || moneyDaily <= 0.0){
+		if(model.equals("") || brand.equals("") || color.equals("") || numberCar.equals("") || moneyDaily <= 0.0 || numberCar.length() > 7){
 			return false;
 		}
 		else {
@@ -110,16 +110,11 @@ public class CarAddRequest {
 
 	@JsonIgnore
 	public boolean isValidDate() {
-		if(annoProduzione.isBefore(LocalDate.now()) || dateAvalableStart.isBefore(LocalDate.now()) || dateAvalableFinish.isBefore(LocalDate.now())) {
+		if(annoProduzione.isAfter(LocalDate.now()) || dateAvalableStart.isBefore(LocalDate.now()) || dateAvalableFinish.isBefore(LocalDate.now()) || dateAvalableStart.isBefore(annoProduzione) || dateAvalableFinish.isBefore(annoProduzione) || annoProduzione.isAfter(dateAvalableFinish) || annoProduzione.isAfter(dateAvalableStart) || annoProduzione == null || dateAvalableStart == null || dateAvalableFinish == null) {
 			return false;
 		}
 		else {
-			if(annoProduzione == null || dateAvalableStart == null || dateAvalableFinish == null) {
-				return false;
-			}
-			else {
-				return true;
-			}
+			return true;
 		}
 	}
 }
