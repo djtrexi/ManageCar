@@ -1,5 +1,7 @@
 package com.example.demo.request.client;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ClientLoginRentalRequest {
 	private String name;
 	private String surname;
@@ -38,5 +40,15 @@ public class ClientLoginRentalRequest {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@JsonIgnore
+	public boolean isValidValue() {
+		if(name.equals("") || surname.equals("") || email.equals("") || phone.equals("")) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 }
