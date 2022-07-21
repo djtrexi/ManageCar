@@ -23,7 +23,7 @@ public class ClientLoginRentalRequest {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+ 
 	@JsonIgnore
 	public boolean isValidValue() {
 		if(email.equals("") || phone.equals("")) {

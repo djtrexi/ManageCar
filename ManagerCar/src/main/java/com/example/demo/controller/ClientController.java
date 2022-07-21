@@ -50,6 +50,6 @@ public class ClientController {
 			else {
 				return ResponseEntity.status(HttpStatus.OK).body(new ClientLoginRentalResponse(c));
 			}
-		}
+		} 
 	}
 }
