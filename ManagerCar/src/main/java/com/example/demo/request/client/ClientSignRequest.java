@@ -2,13 +2,13 @@ package com.example.demo.request.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class ClientLoginRentalRequest {
+public class ClientSignRequest {
 	private String name;
 	private String surname;
 	private String email;
-	private String password;
+	private String phone;
 
-	public ClientLoginRentalRequest() {}
+	public ClientSignRequest() {}
 
 	public String getName() {
 		return name;
@@ -34,17 +34,17 @@ public class ClientLoginRentalRequest {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	
+
 	@JsonIgnore
 	public boolean isValidValue() {
-		if(email.equals("") || password.equals("")) {
+		if(name.equals("") || surname.equals("") || email.equals("") || phone.equals("") || phone.length() < 9 || phone.length() > 15) {
 			return false;
 		}
 		else {

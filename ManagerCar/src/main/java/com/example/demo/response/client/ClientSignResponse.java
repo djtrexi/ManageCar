@@ -2,20 +2,20 @@ package com.example.demo.response.client;
 
 import com.example.demo.model.Client;
 
-public class ClientLoginRentalResponse {
+public class ClientSignResponse {
 	private String name;
 	private String surname;
 
-	public ClientLoginRentalResponse() {}
+	public ClientSignResponse() {}
 
-	public ClientLoginRentalResponse(String name, String surname) {
-		this.name = name;
-		this.surname = surname;
-	}
-
-	public ClientLoginRentalResponse(Client c) {
+	public ClientSignResponse(Client c) {
 		name = c.getName();
 		surname = c.getSurname();
+	}
+
+	public ClientSignResponse(String name, String surname) {
+		this.name = name;
+		this.surname = surname;
 	}
 
 	public String getName() {

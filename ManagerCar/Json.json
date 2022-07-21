@@ -1,6 +1,6 @@
 [
-	{
-    	"model":"Panda 500",
+  {
+  		"model":"Panda 500",
     	"brand":"Fiat",
     	"color":"white",
     	"numberCar":"AAA99AA",
@@ -10,8 +10,14 @@
     	"rental":false,
     	"available":true,
     	"moneyDaily":20.0
-	},
-	{
+  },
+  {
     	"id":1
-	}
+  },
+  {
+    	"name":"Ste",
+    	"surname":"Migs",
+    	"email:":"stemig@gmail.com",
+    	"phone":"33333333"
+  }
 ]

@@ -11,14 +11,23 @@ public class ClientService {
 	@Autowired
 	ClientRepository cr;
 
-	public Client loginRental(Client c) {
+	public Client signClient(Client c) {
 		try {
-			if(cr.loginRental(c) == null) {
-				cr.save(c);
+			cr.save(c);
+			return c;
+		} catch(Exception e) {
+			return null;
+		}
+	}
+
+	public Client loginRental(String email, String password) {
+		try {
+			if(cr.loginRental(email, password) != null) {
+				Client c = cr.loginRental(email, password);
 				return c;
 			}
 			else {
-				return c;
+				return null;
 			}
 		} catch(Exception e) {
 			return null;
