@@ -44,6 +44,7 @@ public class ClientSignRequest {
 
 	@JsonIgnore
 	public boolean isValidValue() {
+		//regex
 		if(name.equals("") || surname.equals("") || email.equals("") || phone.equals("") || phone.length() < 9 || phone.length() > 15) {
 			return false;
 		}
