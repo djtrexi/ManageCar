@@ -46,29 +46,7 @@ public class Car {
 	@JoinColumn(name = "codClient")
 	private Client client;
 
-	@ManyToMany
-	@JoinTable(name = "manage", joinColumns = @JoinColumn(name = "codCar"), inverseJoinColumns = @JoinColumn(name = "codWorker"))
-	private List<Worker> workers = new ArrayList<>();
-
 	public Car() {}
-
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvakabkeFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, Client client, List<Worker> workers) {
-		this.id = id;
-		this.model = model;
-		this.brand = brand;
-		this.color = color;
-		this.numberCar = numberCar;
-		this.annoPorduzione = annoPorduzione;
-		this.isRental = isRental;
-		this.isAvailable = isAvailable;
-		this.dateAvalableStart = dateAvalableStart;
-		this.dateAvalableFinish = dateAvakabkeFinish;
-		this.dateRentalStart = dateRentalStart;
-		this.dateRentalFinish = dateRentalFinish;
-		this.moneyDaily = moneyDaily;
-		this.client = client;
-		this.workers = workers;
-	}
 
 	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvakabkeFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, Client client) {
 		this.id = id;
@@ -164,14 +142,6 @@ public class Car {
 
 	public void setNumberCar(String numberCar) {
 		this.numberCar = numberCar;
-	}
-
-	public List<Worker> getWorkers() {
-		return workers;
-	}
-
-	public void setWorkers(List<Worker> workers) {
-		this.workers = workers;
 	}
 
 	public LocalDate getDateAvalableStart() {
