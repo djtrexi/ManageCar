@@ -42,7 +42,7 @@ public class ClientController {
 		if(!request.isValidValue()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
-		else {
+		else { 
 			Client c = serviceClient.loginRental(request.getEmail(), request.getPhone());
 			if(c == null) {
 				return ResponseEntity.status(HttpStatus.CONFLICT).build();
