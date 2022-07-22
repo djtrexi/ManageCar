@@ -36,7 +36,7 @@ public class ClientController {
 			}
 		}
 	}
-
+ 
 	@RequestMapping(method = RequestMethod.POST, path = "/loginClient")
 	public ResponseEntity<ClientLoginRentalResponse> loginRental(@RequestBody ClientLoginRentalRequest request) {
 		if(!request.isValidValue()) {
