@@ -23,7 +23,7 @@ public class ClientController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/signClient")
 	public ResponseEntity<ClientSignResponse> signClient(@RequestBody ClientSignRequest request){
-		if(request.isValidValue()) {
+		if(!request.isValidValue()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
 		else {
@@ -39,7 +39,7 @@ public class ClientController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/loginClient")
 	public ResponseEntity<ClientLoginRentalResponse> loginRental(@RequestBody ClientLoginRentalRequest request) {
-		if(request.isValidValue()) {
+		if(!request.isValidValue()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
 		else {

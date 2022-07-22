@@ -20,10 +20,10 @@ public class ClientService {
 		}
 	}
 
-	public Client loginRental(String email, String password) {
+	public Client loginRental(String email, String phone) {
 		try {
-			if(cr.loginRental(email, password) != null) {
-				Client c = cr.loginRental(email, password);
+			Client c = cr.loginRental(email, phone);
+			if(c != null) {
 				return c;
 			}
 			else {
