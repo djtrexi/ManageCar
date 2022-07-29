@@ -13,7 +13,7 @@ public class CarDTOPrint {
 	public CarDTOPrint(Car c) {
 		id = c.getId();
 		model = c.getModel();
-		brand = c.getBrand();
+		brand = c.getBrand(); 
 		color = c.getColor();
 	}
 
