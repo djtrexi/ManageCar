@@ -13,6 +13,4 @@ public interface ClientRepository extends JpaRepository<Client, Long>{
 	
 	@Query("SELECT c FROM Client c WHERE c.email = ?1")
 	public long byIdWithEmail(String email);
-	
-	
 }
