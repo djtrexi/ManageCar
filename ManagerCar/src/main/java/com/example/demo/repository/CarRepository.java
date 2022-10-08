@@ -24,4 +24,7 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	
 	@Query("SELECT c.id FROM Car c WHERE c.numberCar = ?1 ORDER BY c.model, c.brand")
 	public long getIdOfCarByNumberCar(String numberCar);
+	
+	@Query("SELECT c FROM Car c WHERE c.id = ?1")
+	public Car getCarById(long id);
 }

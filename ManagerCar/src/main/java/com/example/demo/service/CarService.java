@@ -19,20 +19,25 @@ public class CarService {
 	@Autowired
 	ClientRepository crl;
 
-	public boolean rentalCar(long idUtente, long idClient, LocalDate dataBegin, LocalDate dataFinish) {
+	public boolean rentalCar(long idCar, long idClient, LocalDate dataBegin, LocalDate dataFinish) {
 		try {
-			if(crl.getReferenceById(idUtente) == null) {
+			if(crl.getReferenceById(idClient) == null) {
 				return false;
 			}
 			else {
-				Car car = cr.getReferenceById(idClient);
-				car.setDateRentalStart(dataBegin);
-				car.setDateRentalFinish(dataFinish);
-				car.setAvailable(false);
-				car.setRental(true);
-				car.getClient().setId(idClient);
-				cr.save(car);
-				return true;
+				if(cr.getCarById(idCar) == null) {
+					return false;
+				}
+				else {
+					Car car = cr.getCarById(idCar);
+					car.setDateRentalStart(dataBegin);
+					car.setDateRentalFinish(dataFinish);
+					car.setAvailable(false);
+					car.setRental(true);
+					car.getClient().setId(idClient);
+					cr.save(car);
+					return true;
+				}
 			}
 		} catch(Exception e) {
 			return false;
@@ -48,14 +53,19 @@ public class CarService {
 		}
 	}
 
-	/*public void modifyCar(Car c) {
+	public Car getCarById(long id) {
 		try {
-			
+			if(cr.getCarById(id) == null) {
+				return null;
+			}
+			else {
+				return cr.getCarById(id);
+			}
 		} catch(Exception e) {
-			return;
+			return null;
 		}
-	}*/
-	
+	}
+
 	public Boolean deleteCar(long id) {
 		try {
 			if(cr.existsById(id)) {

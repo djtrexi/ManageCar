@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Car;
 import com.example.demo.request.car.CarAddRequest;
 import com.example.demo.request.car.CarDeleteRequest;
+import com.example.demo.request.car.CarRentalRequest;
 import com.example.demo.response.car.CarDTO;
 import com.example.demo.response.car.CarPrintResponse;
 import com.example.demo.service.CarService;
@@ -24,6 +25,23 @@ public class CarController {
 	@Autowired
 	CarService serviceCar;
 
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.POST, path = "/rentalCar")
+	public ResponseEntity rentalCar(@RequestBody CarRentalRequest request) {
+		if(request.isValid()) {
+			if(serviceCar.rentalCar(request.getIdCar(), request.getIdClient(), request.getDateBegin(), request.getDateFinish())) {
+				return ResponseEntity.status(HttpStatus.OK).build();
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			}
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+	}
+	
+	@CrossOrigin(origins =  "*")
 	@RequestMapping(method = RequestMethod.POST, path = "/addCar")
 	public ResponseEntity<CarDTO> addCar(@RequestBody CarAddRequest request) {
 		if(!request.isValidValue() || !request.isValidDate()) {
@@ -40,6 +58,7 @@ public class CarController {
 		}
 	}
 
+	@CrossOrigin(origins =  "*")
 	@RequestMapping(method = RequestMethod.POST, path = "/deleteCar")
 	public ResponseEntity deleteCar(@RequestBody CarDeleteRequest request) {
 		if(serviceCar.deleteCar(request.getId())) {
@@ -50,7 +69,8 @@ public class CarController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/viewAllCar")
+	@CrossOrigin(origins =  "*")
+	@RequestMapping(method = RequestMethod.GET, path = "/viewAllCar")
 	public ResponseEntity<CarPrintResponse> viewAllCar() {
 		List<Car> cars = serviceCar.viewAllCar();
 		if(cars == null) {
@@ -61,7 +81,8 @@ public class CarController {
 		}	
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/viewCarRental")
+	@CrossOrigin(origins =  "*")
+	@RequestMapping(method = RequestMethod.GET, path = "/viewCarRental")
 	public ResponseEntity<CarPrintResponse> viewAllCarRental() {
 		List<Car> cars = serviceCar.viewAllCarRental();
 		if(cars == null) {
@@ -73,7 +94,7 @@ public class CarController {
 	}
 
 	@CrossOrigin(origins =  "*")
-	@RequestMapping(method = RequestMethod.POST, path = "/viewCarAvailable")
+	@RequestMapping(method = RequestMethod.GET, path = "/viewCarAvailable")
 	public ResponseEntity<CarPrintResponse> viewAllCarAvailable(){
 		List<Car> cars = serviceCar.viewAllCarAvailable();
 		if(cars == null) {
@@ -84,7 +105,8 @@ public class CarController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/viewCarRentalForClient")
+	@CrossOrigin(origins =  "*")
+	@RequestMapping(method = RequestMethod.GET, path = "/viewCarRentalForClient")
 	public ResponseEntity<CarPrintResponse> viewCarForTheRental(){
 		List<Car> cars = serviceCar.viewCarForTheRental();
 		if(cars == null) {
