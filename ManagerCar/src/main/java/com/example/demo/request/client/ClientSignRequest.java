@@ -7,14 +7,16 @@ public class ClientSignRequest {
 	private String surname;
 	private String email;
 	private String phone; 
+	private String password;
 
 	public ClientSignRequest() {}
 
-	public ClientSignRequest(String name, String surname, String email, String phone) {
+	public ClientSignRequest(String name, String surname, String email, String phone, String password) {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
+		this.password = password;
 	}
 
 	public String getName() {
@@ -49,10 +51,21 @@ public class ClientSignRequest {
 		this.phone = phone;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@JsonIgnore
 	public boolean isValidValue() {
 		if(name.equals("") || surname.equals("") || email.equals("") || phone.equals("")) {
 			return false; 
+		}
+		else if(password.equals("") || password.length() <= 5) {
+			return false;
 		}
 		else {
 			return true;

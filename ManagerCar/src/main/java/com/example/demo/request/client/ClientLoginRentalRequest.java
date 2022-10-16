@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ClientLoginRentalRequest {
 	private String email;
-	private String phone;
+	private String password;
 
 	public ClientLoginRentalRequest() {}
 	
-	public ClientLoginRentalRequest(String email, String phone) {
+	public ClientLoginRentalRequest(String email, String password) {
 		this.email = email;
-		this.phone = phone;
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -20,18 +20,18 @@ public class ClientLoginRentalRequest {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public String getPhone() {
-		return phone;
+  
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-  
+
 	@JsonIgnore
 	public boolean isValidValue() {
-		if(email.equals("") || phone.equals("")) {
+		if(email.equals("") || password.equals("")) {
 			return false;
 		}
 		else {

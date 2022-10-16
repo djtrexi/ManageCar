@@ -31,7 +31,7 @@ public class ClientController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
 		else {
-			Client c = new Client(request.getName(), request.getSurname(), request.getEmail(), request.getPhone());
+			Client c = new Client(request.getName(), request.getSurname(), request.getEmail(), request.getPhone(), request.getPassword());
 			if(serviceClient.signClient(c) == null) {
 				return ResponseEntity.status(HttpStatus.CONFLICT).build();
 			}
@@ -48,7 +48,7 @@ public class ClientController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
 		else { 
-			Client c = serviceClient.loginRental(request.getEmail(), request.getPhone());
+			Client c = serviceClient.loginRental(request.getEmail(), request.getPassword());
 			if(c == null) {
 				return ResponseEntity.status(HttpStatus.CONFLICT).build();
 			}

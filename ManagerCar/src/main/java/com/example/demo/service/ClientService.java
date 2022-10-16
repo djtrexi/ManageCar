@@ -20,9 +20,9 @@ public class ClientService {
 		}
 	}
 
-	public Client loginRental(String email, String phone) {
+	public Client loginRental(String email, String password) {
 		try {
-			Client c = cr.loginRental(email, phone);
+			Client c = cr.loginRental(email, password);
 			if(c != null) {
 				return c;
 			}

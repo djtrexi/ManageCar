@@ -22,34 +22,39 @@ public class Client {
 	private String email;
 	@Column(nullable = false, unique = true)
 	private String phone;
+	@Column(nullable = false)
+	private String passowrd;
 
 	@OneToMany(mappedBy = "client")
 	private List<Car> cars;
 
-	public Client() {}
+	public Client() {}	
 
-	public Client(long id, String name, String surname, String email, String phone, List<Car> cars) {
+	public Client(long id, String name, String surname, String email, String phone, String passowrd, List<Car> cars) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
+		this.passowrd = passowrd;
 		this.cars = cars;
 	}
 
-	public Client(String name, String surname, String email, String phone, List<Car> cars) {
+	public Client(long id, String name, String surname, String email, String phone, String passowrd) {
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
-		this.cars = cars;
+		this.passowrd = passowrd;
 	}
 
-	public Client(String name, String surname, String email, String phone) {
+	public Client(String name, String surname, String email, String phone, String passowrd) {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
+		this.passowrd = passowrd;
 	}
 
 	public long getId() {
@@ -90,6 +95,14 @@ public class Client {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getPassowrd() {
+		return passowrd;
+	}
+
+	public void setPassowrd(String passowrd) {
+		this.passowrd = passowrd;
 	}
 
 	public List<Car> getCars() {
