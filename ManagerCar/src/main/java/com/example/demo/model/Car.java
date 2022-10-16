@@ -46,14 +46,18 @@ public class Car {
 	private double moneyDaily;
 	@Column(nullable = true)
 	private double totalMoneyRental;
+	@Column(nullable = true)
+	private boolean typePay;
+	@Column(nullable = true)
+	private boolean pay;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codClient")
 	private Client client;
 
 	public Car() {}
-
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, Client client) {
+	
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay, Client client) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
@@ -68,10 +72,12 @@ public class Car {
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
 		this.totalMoneyRental = totalMoneyRental;
+		this.typePay = typePay;
+		this.pay = pay;
 		this.client = client;
 	}
 
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental) {
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
@@ -86,9 +92,11 @@ public class Car {
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
 		this.totalMoneyRental = totalMoneyRental;
+		this.typePay = typePay;
+		this.pay = pay;
 	}
 
-	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental) {
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay) {
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
@@ -102,8 +110,10 @@ public class Car {
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
 		this.totalMoneyRental = totalMoneyRental;
+		this.typePay = typePay;
+		this.pay = pay;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -214,6 +224,22 @@ public class Car {
 
 	public void setTotalMoneyRental(double totalMoneyRental) {
 		this.totalMoneyRental = totalMoneyRental;
+	}
+
+	public boolean isTypePay() {
+		return typePay;
+	}
+
+	public void setTypePay(boolean typePay) {
+		this.typePay = typePay;
+	}
+
+	public boolean isPay() {
+		return pay;
+	}
+
+	public void setPay(boolean pay) {
+		this.pay = pay;
 	}
 
 	public Client getClient() {
