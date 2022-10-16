@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Car;
+import com.example.demo.model.Client;
 import com.example.demo.repository.CarRepository;
 import com.example.demo.repository.ClientRepository;
 
@@ -34,7 +35,8 @@ public class CarService {
 					car.setDateRentalFinish(dataFinish);
 					car.setAvailable(false);
 					car.setRental(true);
-					car.getClient().setId(idClient);
+					Client c = crl.getReferenceById(idClient);
+					car.setClient(c);
 					cr.save(car);
 					return true;
 				}
