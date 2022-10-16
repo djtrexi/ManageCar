@@ -23,38 +23,38 @@ public class Client {
 	@Column(nullable = false, unique = true)
 	private String phone;
 	@Column(nullable = false)
-	private String passowrd;
+	private String passoword;
 
 	@OneToMany(mappedBy = "client")
 	private List<Car> cars;
 
 	public Client() {}	
 
-	public Client(long id, String name, String surname, String email, String phone, String passowrd, List<Car> cars) {
+	public Client(long id, String name, String surname, String email, String phone, String passoword, List<Car> cars) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
-		this.passowrd = passowrd;
+		this.passoword = passoword;
 		this.cars = cars;
 	}
 
-	public Client(long id, String name, String surname, String email, String phone, String passowrd) {
+	public Client(long id, String name, String surname, String email, String phone, String passoword) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
-		this.passowrd = passowrd;
+		this.passoword = passoword;
 	}
 
-	public Client(String name, String surname, String email, String phone, String passowrd) {
+	public Client(String name, String surname, String email, String phone, String passoword) {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.phone = phone;
-		this.passowrd = passowrd;
+		this.passoword = passoword;
 	}
 
 	public long getId() {
@@ -96,13 +96,13 @@ public class Client {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public String getPassowrd() {
-		return passowrd;
+	
+	public String getPassoword() {
+		return passoword;
 	}
 
-	public void setPassowrd(String passowrd) {
-		this.passowrd = passowrd;
+	public void setPassoword(String passoword) {
+		this.passoword = passoword;
 	}
 
 	public List<Car> getCars() {

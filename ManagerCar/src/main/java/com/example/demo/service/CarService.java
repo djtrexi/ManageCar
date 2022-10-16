@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Car;
@@ -13,6 +14,7 @@ import com.example.demo.repository.CarRepository;
 import com.example.demo.repository.ClientRepository;
 
 @Service
+@Component
 public class CarService {
 	@Autowired
 	CarRepository cr;
