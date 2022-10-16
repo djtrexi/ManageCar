@@ -7,6 +7,11 @@ public class ClientLoginRentalRequest {
 	private String phone;
 
 	public ClientLoginRentalRequest() {}
+	
+	public ClientLoginRentalRequest(String email, String phone) {
+		this.email = email;
+		this.phone = phone;
+	}
 
 	public String getEmail() {
 		return email;

@@ -22,6 +22,7 @@ public class ClientGetIdByEmailRequest {
 	@JsonIgnore
 	public boolean isValid() {
 		if(email.equals("")) {
+			System.out.println(email);
 			return false;
 		}
 		else {
