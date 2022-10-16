@@ -28,6 +28,7 @@ public class Car {
 	private String color;
 	@Column(nullable = false, unique = true)
 	private String numberCar;
+	@Column(nullable = true)
 	private LocalDate annoPorduzione;
 	@Column(nullable = false)
 	private boolean isRental;
@@ -37,18 +38,22 @@ public class Car {
 	private LocalDate dateAvalableStart;
 	@Column(nullable = false)
 	private LocalDate dateAvalableFinish;
+	@Column(nullable = true)
 	private LocalDate dateRentalStart;
+	@Column(nullable = true)
 	private LocalDate dateRentalFinish;
 	@Column(nullable = false)
 	private double moneyDaily;
-
+	@Column(nullable = true)
+	private double totalMoneyRental;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codClient")
 	private Client client;
 
 	public Car() {}
 
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvakabkeFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, Client client) {
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, Client client) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
@@ -58,14 +63,16 @@ public class Car {
 		this.isRental = isRental;
 		this.isAvailable = isAvailable;
 		this.dateAvalableStart = dateAvalableStart;
-		this.dateAvalableFinish = dateAvakabkeFinish;
+		this.dateAvalableFinish = dateAvalableFinish;
 		this.dateRentalStart = dateRentalStart;
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
+		this.totalMoneyRental = totalMoneyRental;
 		this.client = client;
 	}
 
-	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvakabkeFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily) {
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental) {
+		this.id = id;
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
@@ -74,12 +81,29 @@ public class Car {
 		this.isRental = isRental;
 		this.isAvailable = isAvailable;
 		this.dateAvalableStart = dateAvalableStart;
-		this.dateAvalableFinish = dateAvakabkeFinish;
+		this.dateAvalableFinish = dateAvalableFinish;
 		this.dateRentalStart = dateRentalStart;
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
+		this.totalMoneyRental = totalMoneyRental;
 	}
 
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental) {
+		this.model = model;
+		this.brand = brand;
+		this.color = color;
+		this.numberCar = numberCar;
+		this.annoPorduzione = annoPorduzione;
+		this.isRental = isRental;
+		this.isAvailable = isAvailable;
+		this.dateAvalableStart = dateAvalableStart;
+		this.dateAvalableFinish = dateAvalableFinish;
+		this.dateRentalStart = dateRentalStart;
+		this.dateRentalFinish = dateRentalFinish;
+		this.moneyDaily = moneyDaily;
+		this.totalMoneyRental = totalMoneyRental;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -182,6 +206,14 @@ public class Car {
 
 	public void setMoneyDaily(double moneyDaily) {
 		this.moneyDaily = moneyDaily;
+	}
+
+	public double getTotalMoneyRental() {
+		return totalMoneyRental;
+	}
+
+	public void setTotalMoneyRental(double totalMoneyRental) {
+		this.totalMoneyRental = totalMoneyRental;
 	}
 
 	public Client getClient() {

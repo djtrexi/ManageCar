@@ -18,6 +18,19 @@ public class CarAddRequest {
 
 	public CarAddRequest() {}
 
+	public CarAddRequest(String model, String brand, String color, String numberCar, LocalDate annoProduzione, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, boolean rental, boolean available, double moneyDaily) {
+		this.model = model;
+		this.brand = brand;
+		this.color = color;
+		this.numberCar = numberCar;
+		this.annoProduzione = annoProduzione;
+		this.dateAvalableStart = dateAvalableStart;
+		this.dateAvalableFinish = dateAvalableFinish;
+		this.rental = rental;
+		this.available = available;
+		this.moneyDaily = moneyDaily;
+	}
+
 	public String getModel() {
 		return model;
 	}

@@ -5,6 +5,10 @@ public class CarDeleteRequest {
 
 	public CarDeleteRequest() {}
 
+	public CarDeleteRequest(long id) {
+		this.id = id;
+	}
+
 	public long getId() {
 		return id;
 	}
