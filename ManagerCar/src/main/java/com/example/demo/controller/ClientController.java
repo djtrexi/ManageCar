@@ -61,9 +61,9 @@ public class ClientController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.POST, path = "/getIdByEmail")
 	public ResponseEntity<ClientGetIdByEmailResponse> getIdByEmail(@RequestBody ClientGetIdByEmailRequest request){
-		if(!request.isValid()) {
+		if(request.isValid()) {
 			long id = serviceClient.byIdWithEmail(request.getEmail());
-			if(id == 0) {
+			if(id <= 0) {
 				return ResponseEntity.status(HttpStatus.CONFLICT).build();
 			}
 			else {

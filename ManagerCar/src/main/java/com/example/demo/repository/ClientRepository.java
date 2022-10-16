@@ -11,6 +11,6 @@ public interface ClientRepository extends JpaRepository<Client, Long>{
 	@Query("SELECT c FROM Client c WHERE c.email = ?1 AND c.phone = ?2")
 	public Client loginRental(String email, String phone);
 	
-	@Query("SELECT c FROM Client c WHERE c.email = ?1")
+	@Query("SELECT c.id FROM Client c WHERE c.email = ?1")
 	public long byIdWithEmail(String email);
 }
