@@ -7,6 +7,7 @@ public class CarDTOPrint {
 	private String model;
 	private String brand;
 	private String color;
+	private double moneyDaily;
 
 	public CarDTOPrint() {}
 
@@ -15,13 +16,15 @@ public class CarDTOPrint {
 		model = c.getModel();
 		brand = c.getBrand(); 
 		color = c.getColor();
+		moneyDaily = c.getMoneyDaily();
 	}
 
-	public CarDTOPrint(long id, String model, String brand, String color) {
+	public CarDTOPrint(long id, String model, String brand, String color, double moneyDaily) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
+		this.moneyDaily = moneyDaily;
 	}
 
 	public long getId() {
@@ -54,5 +57,13 @@ public class CarDTOPrint {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public double getMoneyDaily() {
+		return moneyDaily;
+	}
+
+	public void setMoneyDaily(double moneyDaily) {
+		this.moneyDaily = moneyDaily;
 	}
 }
