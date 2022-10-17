@@ -50,6 +50,7 @@ public class CarController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();	
 		}
 		else {
+			
 			Car c = new Car(request.getBrand(), request.getModel(), request.getColor(), request.getNumberCar(), request.getAnnoProduzione() , request.isRental(), request.isAvailable(), request.getDateAvalableStart(), request.getDateAvalableFinish(), request.getMoneyDaily(), request.getCod_worker());
 			if(serviceCar.addCar(c)) {
 				return ResponseEntity.status(HttpStatus.OK).body(new CarDTO(c));
