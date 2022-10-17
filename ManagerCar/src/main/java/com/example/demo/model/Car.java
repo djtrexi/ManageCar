@@ -55,9 +55,15 @@ public class Car {
 	@JoinColumn(name = "codClient")
 	private Client client;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codWorker")
+	private Worker worker;
+	
 	public Car() {}
 	
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay, Client client) {
+	
+
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay, Client client, Worker worker) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
@@ -75,6 +81,7 @@ public class Car {
 		this.typePay = typePay;
 		this.pay = pay;
 		this.client = client;
+		this.worker = worker;
 	}
 
 	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay) {
