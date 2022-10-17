@@ -2,6 +2,7 @@ package com.example.demo.request.car;
 
 import java.time.LocalDate;
 
+import com.example.demo.model.Worker;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CarAddRequest {
@@ -15,10 +16,11 @@ public class CarAddRequest {
 	private boolean rental; 
 	private boolean available;
 	private double moneyDaily;
+	private Worker cod_worker;
 
 	public CarAddRequest() {}
 
-	public CarAddRequest(String model, String brand, String color, String numberCar, LocalDate annoProduzione, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, boolean rental, boolean available, double moneyDaily) {
+	public CarAddRequest(String model, String brand, String color, String numberCar, LocalDate annoProduzione, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, boolean rental, boolean available, double moneyDaily, Worker cod_worker) {
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
@@ -29,6 +31,7 @@ public class CarAddRequest {
 		this.rental = rental;
 		this.available = available;
 		this.moneyDaily = moneyDaily;
+		this.cod_worker = cod_worker;
 	}
 
 	public String getModel() {
@@ -109,6 +112,14 @@ public class CarAddRequest {
 
 	public void setMoneyDaily(double moneyDaily) {
 		this.moneyDaily = moneyDaily;
+	}
+
+	public Worker getCod_worker() {
+		return cod_worker;
+	}
+
+	public void setCod_worker(Worker cod_worker) {
+		this.cod_worker = cod_worker;
 	}
 
 	@JsonIgnore

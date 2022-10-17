@@ -61,8 +61,6 @@ public class Car {
 	
 	public Car() {}
 	
-	
-
 	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay, Client client, Worker worker) {
 		this.id = id;
 		this.model = model;
@@ -119,6 +117,21 @@ public class Car {
 		this.totalMoneyRental = totalMoneyRental;
 		this.typePay = typePay;
 		this.pay = pay;
+	}
+
+	//For addCar
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, double moneyDaily, Worker worker) {
+		this.model = model;
+		this.brand = brand;
+		this.color = color;
+		this.numberCar = numberCar;
+		this.annoPorduzione = annoPorduzione;
+		this.isRental = isRental;
+		this.isAvailable = isAvailable;
+		this.dateAvalableStart = dateAvalableStart;
+		this.dateAvalableFinish = dateAvalableFinish;
+		this.moneyDaily = moneyDaily;
+		this.worker = worker;
 	}
 
 	public long getId() {
