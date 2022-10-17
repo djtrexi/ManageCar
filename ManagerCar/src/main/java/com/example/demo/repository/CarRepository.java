@@ -13,6 +13,9 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	@Query("SELECT c FROM Car c ORDER BY c.model, c.brand")
 	public List<Car> viewAllCar();
 	
+	@Query("SELECT c FROM Car c WHERE c.client.id = ?1 ORDER BY c.model, c.brand")
+	public List<Car> viewCarsOfClient(long id);
+	
 	@Query("SELECT c FROM Car c WHERE c.isRental = false ORDER BY c.model, c.brand")
 	public List<Car> viewAllCarRental();
 	

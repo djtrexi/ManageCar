@@ -110,4 +110,18 @@ public class CarService {
 	public List<Car> viewCarForTheRental(){
 		return cr.viewCarForTheRental();
 	}
+
+	public List<Car> viewCarsOfClient(long id){
+		try {
+			if(crl.getReferenceById(id) == null) {
+				return null;
+			}
+			else {
+				return cr.viewCarsOfClient(id);
+			}
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
 }

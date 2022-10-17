@@ -15,6 +15,7 @@ import com.example.demo.model.Car;
 import com.example.demo.request.car.CarAddRequest;
 import com.example.demo.request.car.CarDeleteRequest;
 import com.example.demo.request.car.CarRentalRequest;
+import com.example.demo.request.car.CarsOfClientRequest;
 import com.example.demo.response.car.CarDTO;
 import com.example.demo.response.car.CarPrintResponse;
 import com.example.demo.service.CarService;
@@ -44,7 +45,7 @@ public class CarController {
 	@CrossOrigin(origins =  "*")
 	@RequestMapping(method = RequestMethod.POST, path = "/addCar")
 	public ResponseEntity<CarDTO> addCar(@RequestBody CarAddRequest request) {
-		if(!request.isValidValue() || !request.isValidDate()) {
+		if(!request.isValid()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();	
 		}
 		else {
@@ -109,6 +110,18 @@ public class CarController {
 	@RequestMapping(method = RequestMethod.GET, path = "/viewCarRentalForClient")
 	public ResponseEntity<CarPrintResponse> viewCarForTheRental(){
 		List<Car> cars = serviceCar.viewCarForTheRental();
+		if(cars == null) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.OK).body(new CarPrintResponse(cars));
+		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.POST, path = "/viewCarsOfClient")
+	public ResponseEntity<CarPrintResponse> viewCarsOfClient(@RequestBody CarsOfClientRequest request){
+		List<Car> cars = serviceCar.viewCarsOfClient(request.getId());
 		if(cars == null) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}

@@ -112,18 +112,11 @@ public class CarAddRequest {
 	}
 
 	@JsonIgnore
-	public boolean isValidValue() {
-		if(model.equals("") || brand.equals("") || color.equals("") || numberCar.equals("") || moneyDaily <= 0.0 || numberCar.length() > 7){
+	public boolean isValid() {
+		if(model.equals("") || brand.equals("") || color.equals("") || numberCar.equals("")) {
 			return false;
 		}
-		else {
-			return true;
-		}
-	}
-
-	@JsonIgnore
-	public boolean isValidDate() {
-		if(annoProduzione.isAfter(LocalDate.now()) || dateAvalableStart.isBefore(LocalDate.now()) || dateAvalableFinish.isBefore(LocalDate.now()) || dateAvalableStart.isBefore(annoProduzione) || dateAvalableFinish.isBefore(annoProduzione) || annoProduzione.isAfter(dateAvalableFinish) || annoProduzione.isAfter(dateAvalableStart) || annoProduzione == null || dateAvalableStart == null || dateAvalableFinish == null) {
+		else if(annoProduzione.equals(null) || dateAvalableFinish.equals(null) || dateAvalableStart.equals(null) || annoProduzione.isAfter(dateAvalableFinish) || annoProduzione.isAfter(dateAvalableFinish) || dateAvalableFinish.isBefore(dateAvalableStart) || dateAvalableStart.isAfter(dateAvalableFinish)) {
 			return false;
 		}
 		else {
