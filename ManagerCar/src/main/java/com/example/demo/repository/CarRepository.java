@@ -31,6 +31,6 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	@Query("SELECT c FROM Car c WHERE c.id = ?1")
 	public Car getCarById(long id);
 	
-	@Query("SELECT COUNT(c) FROM Car c WHERE c.isAvailable = false AND c.isRental = false")
+	@Query("SELECT COUNT(c) FROM Car c WHERE c.isAvailable = true AND c.isRental = false")
 	public int countTotCarAvailable();
 }

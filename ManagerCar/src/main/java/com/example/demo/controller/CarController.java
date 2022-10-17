@@ -135,7 +135,7 @@ public class CarController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, path = "/countTotCarAvailable")
 	public ResponseEntity<CarCountResponse> countTotCarAvailable(){
-		if(serviceCar.countTotCarAvailable() == 0) {
+		if(serviceCar.countTotCarAvailable() >= 0) {
 			int tot = serviceCar.countTotCarAvailable();
 			return ResponseEntity.status(HttpStatus.OK).body(new CarCountResponse(tot));		
 		}
