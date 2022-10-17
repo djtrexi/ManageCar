@@ -16,6 +16,7 @@ import com.example.demo.request.car.CarAddRequest;
 import com.example.demo.request.car.CarDeleteRequest;
 import com.example.demo.request.car.CarRentalRequest;
 import com.example.demo.request.car.CarsOfClientRequest;
+import com.example.demo.response.car.CarCountResponse;
 import com.example.demo.response.car.CarDTO;
 import com.example.demo.response.car.CarPrintResponse;
 import com.example.demo.service.CarService;
@@ -127,6 +128,19 @@ public class CarController {
 		}
 		else {
 			return ResponseEntity.status(HttpStatus.OK).body(new CarPrintResponse(cars));
+		}
+	}
+	
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.GET, path = "/countTotCarAvailable")
+	public ResponseEntity<CarCountResponse> countTotCarAvailable(){
+		if(serviceCar.countTotCarAvailable() == 0) {
+			int tot = serviceCar.countTotCarAvailable();
+			return ResponseEntity.status(HttpStatus.OK).body(new CarCountResponse(tot));		
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 }

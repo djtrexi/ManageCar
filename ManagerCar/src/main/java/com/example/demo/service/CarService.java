@@ -124,4 +124,12 @@ public class CarService {
 			return null;
 		}
 	}
+	
+	public int countTotCarAvailable() {
+		try {
+			return cr.countTotCarAvailable();
+		} catch(Exception e) {
+			return -1;
+		}
+	}
 }
