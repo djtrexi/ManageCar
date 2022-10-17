@@ -1,5 +1,8 @@
 package com.example.demo.request.client;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ClientLoginRentalRequest {
@@ -31,7 +34,16 @@ public class ClientLoginRentalRequest {
 
 	@JsonIgnore
 	public boolean isValidValue() {
-		if(email.equals("") || password.equals("")) {
+		final String PATTERN_REGEX_EMAIL = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+		final String PATTERN_REGEX_PASSWORD = "((?=.*[a-z])(?=.*d)(?=.*[@#$%])(?=.*[A-Z]).{8,16})";
+		
+		Pattern patternEmail = Pattern.compile(PATTERN_REGEX_EMAIL);
+		Matcher matcher = patternEmail.matcher(email);
+		
+		Pattern patternPassword = Pattern.compile(PATTERN_REGEX_PASSWORD);
+		Matcher matcher2 = patternPassword.matcher(password);
+		
+		if(!matcher.matches() || !matcher2.matches()) {
 			return false;
 		}
 		else {
