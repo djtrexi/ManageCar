@@ -38,7 +38,7 @@ public class ClientService {
 	
 	public long byIdWithEmail(String email) {
 		try {
-			if(cr.byIdWithEmail(email) == 0L) {
+			if(cr.byIdWithEmail(email) == 0) {
 				return -1;
 			}
 			else {

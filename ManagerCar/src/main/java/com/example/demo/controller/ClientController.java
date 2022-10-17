@@ -63,6 +63,7 @@ public class ClientController {
 	public ResponseEntity<ClientGetIdByEmailResponse> getIdByEmail(@RequestBody ClientGetIdByEmailRequest request){
 		if(request.isValid()) {
 			long id = serviceClient.byIdWithEmail(request.getEmail());
+			System.out.println(id);
 			if(id <= 0) {
 				return ResponseEntity.status(HttpStatus.CONFLICT).build();
 			}
