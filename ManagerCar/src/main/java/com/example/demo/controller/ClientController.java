@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Client;
 import com.example.demo.request.client.ClientGetIdByEmailRequest;
+import com.example.demo.request.client.ClientGetNameByEmailRequest;
 import com.example.demo.request.client.ClientLoginRentalRequest;
 import com.example.demo.request.client.ClientSignRequest;
+import com.example.demo.response.car.ClientGetNameByEmailResponse;
 import com.example.demo.response.client.ClientGetIdByEmailResponse;
 import com.example.demo.response.client.ClientLoginRentalResponse;
 import com.example.demo.response.client.ClientSignResponse;
@@ -69,6 +71,23 @@ public class ClientController {
 			}
 			else {
 				return ResponseEntity.status(HttpStatus.OK).body(new ClientGetIdByEmailResponse(id));
+			}
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.POST, path = "/getNameByEmail")
+	public ResponseEntity<ClientGetNameByEmailResponse> getNameByEmail(@RequestBody ClientGetNameByEmailRequest request){
+		if(request.isValid()) {
+			if(serviceClient.byNameWithEmail(request.getEmail()) == null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			}
+			else {
+				String nameClient = serviceClient.byNameWithEmail(request.getEmail());
+				return ResponseEntity.status(HttpStatus.OK).body(new ClientGetNameByEmailResponse(nameClient));
 			}
 		}
 		else {

@@ -48,4 +48,17 @@ public class ClientService {
 			return -1;
 		}
 	}
+	
+	public String byNameWithEmail(String email) {
+		try {
+			if(cr.byNameWithEmail(email) == null) {
+				return null;
+			}
+			else {
+				return cr.byNameWithEmail(email);
+			}
+		} catch(Exception e) {
+			return null;
+		}
+	}
 }

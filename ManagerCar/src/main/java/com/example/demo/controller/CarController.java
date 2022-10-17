@@ -131,7 +131,6 @@ public class CarController {
 		}
 	}
 	
-	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, path = "/countTotCarAvailable")
 	public ResponseEntity<CarCountResponse> countTotCarAvailable(){
