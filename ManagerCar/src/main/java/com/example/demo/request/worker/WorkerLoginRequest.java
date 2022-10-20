@@ -45,7 +45,7 @@ public class WorkerLoginRequest {
 	@JsonIgnore
 	public boolean isValid() {
 		final String PATTERN_REGEX_EMAIL = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-		final String PATTERN_REGEX_PASSWORD = "((?=.*[a-z])(?=.*d)(?=.*[@#$%])(?=.*[A-Z]).{8,16})";
+		final String PATTERN_REGEX_PASSWORD = "((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,16})";
 		
 		Pattern patternEmail = Pattern.compile(PATTERN_REGEX_EMAIL);
 		Matcher matcher = patternEmail.matcher(email);
