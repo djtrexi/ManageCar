@@ -13,14 +13,12 @@ public class CarAddRequest {
 	private LocalDate annoProduzione;
 	private LocalDate dateAvalableStart;
 	private LocalDate dateAvalableFinish;
-	private boolean rental; 
-	private boolean available;
 	private double moneyDaily;
-	private Worker cod_worker;
+	private long idWorker;
 
 	public CarAddRequest() {}
 
-	public CarAddRequest(String model, String brand, String color, String numberCar, LocalDate annoProduzione, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, boolean rental, boolean available, double moneyDaily, Worker cod_worker) {
+	public CarAddRequest(String model, String brand, String color, String numberCar, LocalDate annoProduzione, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, double moneyDaily, long idWorker) {
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
@@ -28,10 +26,8 @@ public class CarAddRequest {
 		this.annoProduzione = annoProduzione;
 		this.dateAvalableStart = dateAvalableStart;
 		this.dateAvalableFinish = dateAvalableFinish;
-		this.rental = rental;
-		this.available = available;
 		this.moneyDaily = moneyDaily;
-		this.cod_worker = cod_worker;
+		this.idWorker = idWorker;
 	}
 
 	public String getModel() {
@@ -90,22 +86,6 @@ public class CarAddRequest {
 		this.dateAvalableFinish = dateAvalableFinish;
 	}
 
-	public boolean isRental() {
-		return rental;
-	}
-
-	public void setRental(boolean rental) {
-		this.rental = rental;
-	}
-
-	public boolean isAvailable() {
-		return available;
-	}
-
-	public void setAvailable(boolean available) {
-		this.available = available;
-	}
-
 	public double getMoneyDaily() {
 		return moneyDaily;
 	}
@@ -114,12 +94,12 @@ public class CarAddRequest {
 		this.moneyDaily = moneyDaily;
 	}
 
-	public Worker getCod_worker() {
-		return cod_worker;
+	public long getidWorker() {
+		return idWorker;
 	}
 
-	public void setCod_worker(Worker cod_worker) {
-		this.cod_worker = cod_worker;
+	public void setCod_worker(long idWorker) {
+		this.idWorker = idWorker;
 	}
 
 	@JsonIgnore
@@ -127,7 +107,7 @@ public class CarAddRequest {
 		if(model.equals("") || brand.equals("") || color.equals("") || numberCar.equals("")) {
 			return false;
 		}
-		else if(annoProduzione.equals(null) || dateAvalableFinish.equals(null) || dateAvalableStart.equals(null) || annoProduzione.isAfter(dateAvalableFinish) || annoProduzione.isAfter(dateAvalableFinish) || dateAvalableFinish.isBefore(dateAvalableStart) || dateAvalableStart.isAfter(dateAvalableFinish)) {
+		else if(annoProduzione == null || dateAvalableFinish == null || dateAvalableStart == null || annoProduzione.isAfter(dateAvalableFinish) || annoProduzione.isAfter(dateAvalableFinish) || dateAvalableFinish.isBefore(dateAvalableStart) || dateAvalableStart.isAfter(dateAvalableFinish)) {
 			return false;
 		}
 		else {
