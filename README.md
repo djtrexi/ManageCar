@@ -1,3 +1,50 @@
+# Manage and rental car
+
+### Purpose 
+
+This project have two purposes:
+
+>
+>1) Rental the car for the client
+>1) Manage the car for the worker
+>
+
+### Project organization
+
+I have divided the project into several task:
+
+- Frist task
+  > Start with the question on:
+  > - What dates must manage?
+  > - How i must manage must?
+  > - What tools will i use?
+  > 
+
+- Second task
+  > Think tools:
+  > In fact, i thought at the possible tools for the make the project. <br>I choose:
+  > - SQL (DBMS is MySQL) for the create database
+  > - Java (for the part Back-End) with use the framework Spring-boot
+  > - JavaScript (for the part Front-End) with use the framework ReactJs
+  
+- Third task
+  > Create the Diagrams:
+  > - UML
+  > - E-R
+
+- Fourth task
+  > Create the repository on git
+  
+- Fiverth task
+  > Write the code
+  >> - SQL
+  >> - Java
+  >> - JavaScript
+
+### How install the project
+
+For install the project you must do 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
