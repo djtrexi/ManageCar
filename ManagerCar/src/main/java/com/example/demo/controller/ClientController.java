@@ -13,10 +13,12 @@ import com.example.demo.model.Client;
 import com.example.demo.request.client.ClientGetIdByEmailRequest;
 import com.example.demo.request.client.ClientGetNameByEmailRequest;
 import com.example.demo.request.client.ClientLoginRentalRequest;
+import com.example.demo.request.client.ClientSetDoorClientRequest;
 import com.example.demo.request.client.ClientSignRequest;
 import com.example.demo.response.car.ClientGetNameByEmailResponse;
 import com.example.demo.response.client.ClientGetIdByEmailResponse;
 import com.example.demo.response.client.ClientLoginRentalResponse;
+import com.example.demo.response.client.ClientSetDoorClientResponse;
 import com.example.demo.response.client.ClientSignResponse;
 import com.example.demo.service.ClientService;
 
@@ -92,6 +94,23 @@ public class ClientController {
 		}
 		else {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.PUT, path = "/setDoorClient")
+	public ResponseEntity<ClientSetDoorClientResponse> setDoorClient(@RequestBody ClientSetDoorClientRequest request){
+		if(!request.isValid()) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		else {
+			if(serviceClient.setDoorClient(request.getId()) == null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			}
+			else {
+				String numberDoor = serviceClient.setDoorClient(request.getId());
+				return ResponseEntity.status(HttpStatus.OK).body(new ClientSetDoorClientResponse(numberDoor));
+			}
 		}
 	}
 }

@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Car {
@@ -34,22 +35,12 @@ public class Car {
 	private boolean isRental;
 	@Column(nullable = false)
 	private boolean isAvailable;
-	@Column(nullable = false)
 	private LocalDate dateAvalableStart;
-	@Column(nullable = false)
 	private LocalDate dateAvalableFinish;
-	@Column(nullable = true)
 	private LocalDate dateRentalStart;
-	@Column(nullable = true)
 	private LocalDate dateRentalFinish;
 	@Column(nullable = false)
 	private double moneyDaily;
-	@Column(nullable = true)
-	private double totalMoneyRental;
-	@Column(nullable = true)
-	private boolean typePay;
-	@Column(nullable = true)
-	private boolean pay;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codClient")
@@ -59,9 +50,12 @@ public class Car {
 	@JoinColumn(name = "codWorker")
 	private Worker worker;
 	
-	public Car() {}
+	@OneToMany(mappedBy = "car")
+	private List<Bill> bills;
 	
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay, Client client, Worker worker) {
+	public Car() {}
+
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, Client client, Worker worker, List<Bill> bills) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
@@ -75,14 +69,12 @@ public class Car {
 		this.dateRentalStart = dateRentalStart;
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
-		this.totalMoneyRental = totalMoneyRental;
-		this.typePay = typePay;
-		this.pay = pay;
 		this.client = client;
 		this.worker = worker;
+		this.bills = bills;
 	}
 
-	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay) {
+	public Car(long id, String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily) {
 		this.id = id;
 		this.model = model;
 		this.brand = brand;
@@ -96,12 +88,9 @@ public class Car {
 		this.dateRentalStart = dateRentalStart;
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
-		this.totalMoneyRental = totalMoneyRental;
-		this.typePay = typePay;
-		this.pay = pay;
 	}
 
-	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily, double totalMoneyRental, boolean typePay, boolean pay) {
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, LocalDate dateRentalStart, LocalDate dateRentalFinish, double moneyDaily) {
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
@@ -114,20 +103,25 @@ public class Car {
 		this.dateRentalStart = dateRentalStart;
 		this.dateRentalFinish = dateRentalFinish;
 		this.moneyDaily = moneyDaily;
-		this.totalMoneyRental = totalMoneyRental;
-		this.typePay = typePay;
-		this.pay = pay;
 	}
 
-	//For addCar
-	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, boolean isRental, boolean isAvailable, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, double moneyDaily, Worker worker) {
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, double moneyDaily) {
 		this.model = model;
 		this.brand = brand;
 		this.color = color;
 		this.numberCar = numberCar;
 		this.annoPorduzione = annoPorduzione;
-		this.isRental = isRental;
-		this.isAvailable = isAvailable;
+		this.dateAvalableStart = dateAvalableStart;
+		this.dateAvalableFinish = dateAvalableFinish;
+		this.moneyDaily = moneyDaily;
+	}
+
+	public Car(String model, String brand, String color, String numberCar, LocalDate annoPorduzione, LocalDate dateAvalableStart, LocalDate dateAvalableFinish, double moneyDaily, Worker worker) {
+		this.model = model;
+		this.brand = brand;
+		this.color = color;
+		this.numberCar = numberCar;
+		this.annoPorduzione = annoPorduzione;
 		this.dateAvalableStart = dateAvalableStart;
 		this.dateAvalableFinish = dateAvalableFinish;
 		this.moneyDaily = moneyDaily;
@@ -238,35 +232,27 @@ public class Car {
 		this.moneyDaily = moneyDaily;
 	}
 
-	public double getTotalMoneyRental() {
-		return totalMoneyRental;
-	}
-
-	public void setTotalMoneyRental(double totalMoneyRental) {
-		this.totalMoneyRental = totalMoneyRental;
-	}
-
-	public boolean isTypePay() {
-		return typePay;
-	}
-
-	public void setTypePay(boolean typePay) {
-		this.typePay = typePay;
-	}
-
-	public boolean isPay() {
-		return pay;
-	}
-
-	public void setPay(boolean pay) {
-		this.pay = pay;
-	}
-
 	public Client getClient() {
 		return client;
 	}
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public Worker getWorker() {
+		return worker;
+	}
+
+	public void setWorker(Worker worker) {
+		this.worker = worker;
+	}
+
+	public List<Bill> getBills() {
+		return bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
 	}
 }
