@@ -1,4 +1,4 @@
-![alt img](DiagrammaE-R.jpg)
+![alt img](img/DiagrammaE-R.jpg)
 
 # Getting Started with Create React App
 
