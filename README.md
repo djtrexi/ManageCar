@@ -1,58 +1,73 @@
-# Manage and rental car
+![alt img](DiagrammaE-R.jpg)
 
-### Purpose 
+# Getting Started with Create React App
 
-This project have two purposes:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
->
->1) Rental the car for the client
->1) Manage the car for the worker
->
+## Available Scripts
 
-### Project organization
+In the project directory, you can run:
 
-I have divided the project into several task:
+### `npm start`
 
-- Frist task
-  > Start with the question on:
-  > - What dates must manage?
-  > - How i must manage must?
-  > - What tools will i use?
-  > 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- Second task
-  > Think tools:
-  > In fact, i thought at the possible tools for the make the project. <br>I choose:
-  > - SQL (DBMS is MySQL) for the create database
-  > - Java (for the part Back-End) with use the framework Spring-boot
-  > - JavaScript (for the part Front-End) with use the framework ReactJs
-  
-- Third task
-  > Create the Diagrams:
-  > - UML
-  > - E-R
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- Fourth task
-  > Create the repository on git
-  
-- Fiverth task
-  > Write the code
-  >> - SQL
-  >> - Java
-  >> - JavaScript
+### `npm test`
 
-## How install the project
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Install the software:
+### `npm run build`
 
-  - Part database
-    > You have two ways:
-    >1) Install MySQL Shell (Link for download : [MySQL](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html))
-    >2) Install XAMPP (Link for download : [XAMPP](https://www.apachefriends.org/download.html))<br>
-    > IF you use the first way so you must modify the file application properties.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-  - Back-End software
-  > You must have a version di Java 11 or higher
-  > - IDE of Java (Link for download: [Ecplise](https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-enterprise-java-and-web-developers))
-  >
-  then you must download Visual Studio Code (Link for download: [VSC](https://code.visualstudio.com/download))
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
