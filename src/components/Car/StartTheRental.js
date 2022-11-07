@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -12,26 +12,40 @@ import {
   Button,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 
 function StartTheRental() {
   const location = useLocation();
   const navigate = useNavigate();
 
   var today = new Date();
-  let day = String(today.getDate()).padStart(2, "0");
-  let month = String(today.getMonth() + 1).padStart(2, "0");
-  let year = today.getFullYear();
-  today = year + "/" + month + "/" + day;
+  var date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
-  const [dateBegin, setDateBegin] = React.useState(dayjs());
-  const [dateFinish, setDateFinish] = React.useState(dayjs());
+  const [dateBegin, setDateBegin] = useState(new Date(date));
+  const [dateFinish, setDateFinish] = useState(new Date(date));
+  const [brandCar, setBrandCar] = useState("");
 
   const objEmailUser = location.state.email;
   let emailInput = String(Object.values(objEmailUser)[0]);
+
+  console.log(location.state);
+
+  const getNameCar = async () => {
+    return await axios
+      .post("http://localhost:8081/car/getBrandCarById", {
+        id: location.state.idCar,
+      })
+      .then((response) => {
+        let valueJSON = JSON.stringify(response.data);
+        let parseJSON = JSON.parse(valueJSON);
+        setBrandCar(parseJSON.brand);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,7 +62,12 @@ function StartTheRental() {
             dateFinish: dateFinish,
           })
           .then((response) => {
-            navigate("/order", {state: { idCar: location.state.idCar, email: location.state.email }});
+            navigate("/order", {
+              state: {
+                idCar: location.state.idCar,
+                email: location.state.email,
+              },
+            });
           })
           .catch((err) => {
             console.error(err);
@@ -59,13 +78,17 @@ function StartTheRental() {
       });
   };
 
+  useEffect(() => {
+    getNameCar();
+  }, []);
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar variant="dense">
             <Typography variant="h4" color={"inherit"} component="div">
-              Information for the rental
+              Information for the rental <>{brandCar}</>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -91,27 +114,25 @@ function StartTheRental() {
           >
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack spacing={3}>
-                <DesktopDatePicker
-                  required
-                  minDate={today}
-                  label="Date begin rental"
-                  inputFormat="YYYY/MM/DD"
+                <DatePicker
+                  label="Date start rental"
+                  renderInput={(params) => <TextField {...params} />}
                   value={dateBegin}
                   onChange={(event) => {
-                    setDateBegin(dateBegin);
+                    setDateBegin(event);
                   }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-                <DesktopDatePicker
+                  minDate={today}
                   required
-                  minDate={dateBegin}
+                />
+                <DatePicker
                   label="Date finish rental"
-                  inputFormat="YYYY/MM/DD"
+                  renderInput={(params) => <TextField {...params} />}
                   value={dateFinish}
                   onChange={(event) => {
-                    setDateFinish(dateFinish);
+                    setDateFinish(event);
                   }}
-                  renderInput={(params) => <TextField {...params} />}
+                  minDate={today}
+                  required
                 />
               </Stack>
             </LocalizationProvider>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from "react";
 import {
   Grid,
   Box,
@@ -6,80 +6,94 @@ import {
   Toolbar,
   Typography,
   CssBaseline,
-  FormLabel,
   FormControlLabel,
   Radio,
   RadioGroup,
   Button,
 } from "@mui/material";
-import { Container } from '@mui/system';
-import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Container } from "@mui/system";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function OrderCar() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [moneyDaily, setMoneyDaily] = useState(0);
   const [totDifferenceDate, setTotDifferenceDate] = useState(0);
   const [totPay, setTotPay] = useState(0);
   const [typePay, setTypePay] = useState("");
   const [booleanTypePay, setBooleanTypePay] = useState(false);
+/*
+  const objIdCar = location.state.idCar;
+  let idCar = Number(Object.values(objIdCar)[0]);*/
 
-  const differenceDate = async() => {
-    return await axios.post("http://localhost:8081/car/countTotCarRentalByIdClient", {
-      id: location.state.idCar,
-    }).then((response) => {
-      setTotDifferenceDate(response.data);
-      axios.post("http://localhost:8081/car/moneyDailyById", {
+  const differenceDate = () => {
+    axios
+      .post("http://localhost:8081/car/differenceDate", {
         id: location.state.idCar,
-      }).then((response) => {
-        if(totDifferenceDate === 0){
-          setTotPay(response.data.moneyDaily);
-        }
-        else{
-          setTotPay(totDifferenceDate * response.data.moneyDaily);
-        }
-      }).catch((err) => {
-        console.error(err);
       })
-    }).catch((err) => {
-      console.error(err);
-    })
+      .then((response) => {
+        let valueJSON = JSON.stringify(response.data);
+        let parseJSON = JSON.parse(valueJSON);
+        setTotDifferenceDate(parseJSON.tot);
+        axios
+          .post("http://localhost:8081/car/moneyDailyById", {
+            id: location.state.idCar,
+          })
+          .then((response) => {
+            let valueJSON = JSON.stringify(response.data);
+            let parseJSON = JSON.parse(valueJSON);
+            setMoneyDaily(parseJSON.moneyDaily);
+            if (totDifferenceDate === 0) {
+              setTotPay(moneyDaily);
+            } else {
+              setTotPay(totDifferenceDate * moneyDaily);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const handleTypePay = (event) => {
     setTypePay(event.target.value);
   };
 
-  const handleSubmit = () => {
-    if(typePay === "cash"){
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (typePay === "cash") {
       setBooleanTypePay(true);
-    }
-    else{
+    } else {
       setBooleanTypePay(false);
     }
-    axios.post("http://localhost:8081/car/updatePayment", {
-      id: location.state.idCar,
-      totalMoneyRental: totPay,
-      typePay: booleanTypePay,
-    }).then((response) => {
-      if(booleanTypePay){
-        navigate("/doorCashClient", {state: { email: location.state.email }});
-      }
-      else{
-        navigate("/finishOrder")
-      }
-    }).catch((err) => {
-      console.error(err);
-    })
+    axios
+      .post("http://localhost:8081/car/updatePayment", {
+        id: location.state.idCar,
+        totalMoneyRental: totPay,
+        typePay: booleanTypePay,
+      })
+      .then((response) => {
+        if (booleanTypePay) {
+          navigate("/doorCashClient", {
+            state: { email: location.state.email },
+          });
+        } else {
+          navigate("/finishOrder");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
-
-  useEffect(() => {
-    differenceDate();
-  }, [])
 
   return (
     <div>
+      {differenceDate()}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar variant="dense">
@@ -90,7 +104,7 @@ function OrderCar() {
         </AppBar>
       </Box>
       <Container component={"main"} maxWidth="xs">
-        <CssBaseline/>
+        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -102,6 +116,7 @@ function OrderCar() {
           <Typography variant="subtitle1">
             You must pay {totPay} for the rental car
           </Typography>
+
           <Typography variant="subtitle1">
             Insert data for the payment
           </Typography>
@@ -113,24 +128,21 @@ function OrderCar() {
           >
             <Grid container spacing={2}>
               <Grid item xs={3}>
-                <FormLabel>
-                  Type of payment
-                </FormLabel>
                 <RadioGroup
                   name="typePay"
                   value={typePay}
                   onChange={handleTypePay}
                 >
-                <FormControlLabel 
-                  value="cart"
-                  control={<Radio />} 
-                  label="Cart"
-                />
-                <FormControlLabel 
-                  value="cash" 
-                  control={<Radio />}
-                  label="Cash"
-                />
+                  <FormControlLabel
+                    value="cart"
+                    control={<Radio />}
+                    label="Cart"
+                  />
+                  <FormControlLabel
+                    value="cash"
+                    control={<Radio />}
+                    label="Cash"
+                  />
                 </RadioGroup>
               </Grid>
               <Grid
@@ -139,7 +151,6 @@ function OrderCar() {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                style={{ minHeight: "50vh" }}
               >
                 <Button
                   variant="contained"
@@ -155,7 +166,7 @@ function OrderCar() {
         </Box>
       </Container>
     </div>
-  )
+  );
 }
 
 export default OrderCar;
