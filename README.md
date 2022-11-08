@@ -1,7 +1,7 @@
 # Manage and rental car
 ![alt img](https://media2.giphy.com/media/26BRrcK4dXrxl817q/giphy.gif?cid=790b76117084c3f85dd54eedf043fe571e0d8509faa3e36d&rid=giphy.gif&ct=g)
 
-### Purpose 
+## Purpose 
 
 This project have two purposes:
 
@@ -10,7 +10,7 @@ This project have two purposes:
 >1) Manage the car for the worker
 >
 
-### Project organization
+## Project organization
 
 I have divided the project into several task:
 
@@ -27,6 +27,7 @@ I have divided the project into several task:
   > - SQL (DBMS is MySQL) for the create database
   > - Java (for the part Back-End) with use the framework Spring-boot
   > - JavaScript (for the part Front-End) with use the framework ReactJs
+  >
   
 - Third task
   > Create the Diagrams:
@@ -36,25 +37,50 @@ I have divided the project into several task:
 
 - Fourth task
   > Create the repository on git
+  > 
   
 - Fiverth task
   > Write the code
   >> - SQL
   >> - Java
   >> - JavaScript
+  >> 
+  >
 
 ## How install the project
 
 ### Install the software:
-
-  > Part database
+  ````
+  If you have already installed all these software, you can skip to part of "start the project" 
+  ````
+  #### Database software
   > You have two ways:
   >1) Install MySQL Shell (Link for download : [MySQL](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html))
   >1) Install XAMPP (Link for download : [XAMPP](https://www.apachefriends.org/download.html))
-
-  > Back-End software
-  > You must have a version di Java 11 or higher
-  > - IDE of Java (Link for download: [Ecplise](https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-enterprise-java-and-web-developers))
-  > into IDE you must search "marketplace" and do the search for 
   
+  #### Back-End software
+  > You can install different IDE of Java, ex:
+  >> - NetBeans
+  >> - Intellij IDEA
+  >> - Eclipse
+  >>
+  > I used the ecplise as IDE.
+  > - Ecplise (Link for download: [Ecplise](https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-enterprise-java-and-web-developers))
+  > <br> inside of IDE you must search "marketplace" and do the search for "spring boot"
+  ![Immagine 2022-11-08 172509](https://user-images.githubusercontent.com/57871388/200627478-3be696fd-e8be-4b7c-84e9-fcf18c9a415d.jpg)
+  > <br> (P.S. You must have a version di Java 11 or higher) 
+  
+  #### Front-End software
+  > You can install different IDE for the <strong>Front-End</strong>
+  >> - Atom
+  >> - Visual Studio Code
+  >> 
+  > I used the Visual Studio Code <strong>(VSC)</strong>.
+  > - Visual Studio Code (Link for download: [VSC](https://code.visualstudio.com/download))
+  > <br>After install the VSC, you must install the pack of <strong>React JS</strong>.
+  > - React JS (Link for tutorial download: [React js](https://reactjs.org/docs/getting-started.html))
+  > <br>And you must install the pack of <strong>Material UI</strong> for the style of web site
+  > - Material UI (Link for tutorial download: [Material UI](https://mui.com/material-ui/getting-started/installation/))
+
+## start the project
   
