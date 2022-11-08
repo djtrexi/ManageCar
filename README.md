@@ -112,3 +112,4 @@ npm install @mui/material @emotion/react @emotion/styled
   cd my-app
   npm start
   ````
+  After ````npm start```` the device open a page on your browser at the port 3000 (instead Java take the port 8081).
