@@ -99,7 +99,16 @@ npm install @mui/material @emotion/react @emotion/styled
   1) Start the spring boot
   2) Start the react js
   ````
-  You use the <strong>CMD</strong> or the <strong>Terminal</strong> on Visual Studio Code, and wirte this command:
-  ````npm
-  npm 
+  ### Part one:
+  You have two ways:
+  ````
+  1) Click on the project (in this case: "Manager Car") and with the right mouse button select "run as" and click on "spring boot".
+  2) Shortcut: Alt+Shift+X
+  ````
+  
+  ### Part two:
+  You use the <strong>command propmt</strong> or the <strong>Terminal</strong> on Visual Studio Code, and wirte this command:
+  ```npm
+  cd my-app
+  npm start
   ````
