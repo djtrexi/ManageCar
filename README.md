@@ -4,11 +4,10 @@
 ## Purpose 
 
 This project have two purposes:
-
->
->1) Rental the car for the client
->1) Manage the car for the worker
->
+````
+1) Rental the car for the client
+2) Manage the car for the worker
+````
 
 ## Project organization
 
@@ -78,9 +77,29 @@ I have divided the project into several task:
   > I used the Visual Studio Code <strong>(VSC)</strong>.
   > - Visual Studio Code (Link for download: [VSC](https://code.visualstudio.com/download))
   > <br>After install the VSC, you must install the pack of <strong>React JS</strong>.
-  > - React JS (Link for tutorial download: [React js](https://reactjs.org/docs/getting-started.html))
+  > - React JS (Link for tutorial: [React js](https://reactjs.org/docs/getting-started.html))
+  > you must write this command on <strong>command prompt</strong>
+  ```npm
+mkdir name-folder-app
+npx create-react-app my-app
+cd my-app
+  ````
+  >
   > <br>And you must install the pack of <strong>Material UI</strong> for the style of web site
-  > - Material UI (Link for tutorial download: [Material UI](https://mui.com/material-ui/getting-started/installation/))
+  > - Material UI (Link for tutorial: [Material UI](https://mui.com/material-ui/getting-started/installation/))
+  > you must write this command on <strong>command prompt</strong>
+```npm
+cd my-app
+npm install @mui/material @emotion/react @emotion/styled
+````
 
 ## start the project
-  
+  For the start the project, you must do two step:
+  ````
+  1) Start the spring boot
+  2) Start the react js
+  ````
+  You use the <strong>CMD</strong> or the <strong>Terminal</strong> on Visual Studio Code, and wirte this command:
+  ````npm
+  npm 
+  ````
