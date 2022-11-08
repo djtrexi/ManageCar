@@ -32,7 +32,7 @@ I have divided the project into several task:
   > Create the Diagrams:
   > - UML
   > - E-R
-  ![alt img](img/DiagrammaE-R.jpg)
+  ![Screenshot_20221105_114816](https://user-images.githubusercontent.com/57871388/200616358-452a4b98-a811-48f5-87da-2e1865bac199.png)
 
 - Fourth task
   > Create the repository on git
@@ -51,8 +51,10 @@ I have divided the project into several task:
   > You have two ways:
   >1) Install MySQL Shell (Link for download : [MySQL](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html))
   >1) Install XAMPP (Link for download : [XAMPP](https://www.apachefriends.org/download.html))
-  > IF you use the first way so you must modify the file application properties.
 
   > Back-End software
   > You must have a version di Java 11 or higher
   > - IDE of Java (Link for download: [Ecplise](https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-enterprise-java-and-web-developers))
+  > into IDE you must search "marketplace" and do the search for 
+  
+  
