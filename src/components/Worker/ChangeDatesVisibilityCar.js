@@ -14,20 +14,20 @@ import {
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
 
 function ChangeDatesVisibilityCar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const today = new Date().toISOString().split("T")[0];
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
   const objIdWorker = location.state.idWorker;
   let idInput = Number(Object.values(objIdWorker)[0]);
 
   const [nameWorker, setNameWorker] = useState("");
-  const [date_available_finish, setAvalableFinish] = React.useState(dayjs());
-  const [date_available_start, setAvalableStart] = React.useState(dayjs());
+  const [date_available_finish, setAvalableFinish] = useState(new Date(date));
+  const [date_available_start, setAvalableStart] = useState(new Date(date));
 
   const getName = async () => {
     return await axios
@@ -96,34 +96,22 @@ function ChangeDatesVisibilityCar() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack spacing={3}>
                 <DatePicker
-                  value={date_available_start}
-                  openTo="year"
-                  name="date_available_start"
-                  views={["year", "month", "day"]}
                   label="Date available start"
-                  minDate={dayjs(today)}
-                  inputFormat="YYYY/MM/DD"
-                  renderInput={(params) => (
-                    <TextField {...params} helperText={null} />
-                  )}
+                  minDate={date}
+                  renderInput={(params) => <TextField {...params} />}
+                  value={date_available_start}
                   onChange={(event) => {
-                    setAvalableStart(date_available_start);
+                    setAvalableStart(event);
                   }}
                   required
                 />
                 <DatePicker
-                  minDate={date_available_start}
-                  inputFormat="YYYY/MM/DD"
-                  renderInput={(params) => (
-                    <TextField {...params} helperText={null} />
-                  )}
-                  value={date_available_finish}
-                  openTo="year"
-                  name="date_available_finish"
-                  views={["year", "month", "day"]}
                   label="Date available finish"
+                  minDate={date_available_start}
+                  renderInput={(params) => <TextField {...params} />}
+                  value={date_available_finish}
                   onChange={(event) => {
-                    setAvalableFinish(date_available_finish);
+                    setAvalableFinish(event);
                   }}
                   required
                 />

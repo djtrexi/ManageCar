@@ -14,6 +14,8 @@ function IndexWorker() {
 
   const [name, setName] = useState("");
   const [idWorker, setIdWorker] = useState(0);
+  const [totBill, setTotBill] = useState(0);
+  const [totBillBoolean, setTotBillBoolean] = useState(false);
 
   function getName() {
     axios
@@ -38,8 +40,50 @@ function IndexWorker() {
       });
   }
 
-  useEffect(() => {
+  const countBillForWorker = async () => {
     getName();
+    return await axios
+      .post("http://localhost:8081/worker/getIdByEmail", {
+        email: location.state.email,
+      })
+      .then((response) => {
+        axios
+          .post("http://localhost:8081/bill/totBillCashForDeterminedWorker", {
+            id: response.data.id,
+          })
+          .then((response) => {
+            setTotBill(response.data);
+            if (totBill === 0) {
+              setTotBillBoolean(false);
+            } else {
+              setTotBillBoolean(true);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  function buttonToTBill() {
+    return (
+      <div>
+        <Button
+          sx={{ mt: 2 }}
+          variant="contained"
+          onClick={() => navigate("/finishpayment")}
+        >
+          Show bills
+        </Button>
+      </div>
+    );
+  }
+
+  useEffect(() => {
+    countBillForWorker();
   }, []);
 
   return (
@@ -92,6 +136,11 @@ function IndexWorker() {
           >
             View car manage of {name}
           </Button>
+          <React.Fragment>&nbsp;&nbsp;&nbsp;</React.Fragment>
+          {totBillBoolean &&   
+              buttonToTBill()
+            
+          }
         </Box>
       </Container>
     </div>

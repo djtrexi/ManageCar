@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
+  Grid,
   AppBar,
   Toolbar,
   Typography,
@@ -27,6 +28,7 @@ function AllCarOfWorker() {
   const isRental = "Is rental";
   const isNotRental = "Is not rental";
 
+  const [emailWorker, setEmailWorker] = useState("");
   const [loading, setLoading] = useState(true);
   const [cars, setCars] = useState([]);
   const [name, setName] = useState("");
@@ -49,8 +51,23 @@ function AllCarOfWorker() {
       });
   };
 
+  const getEmail = () => {
+    axios
+      .post("http://localhost:8081/worker/getEmailById", {
+        id: idInput,
+      })
+      .then((response) => {
+        let valueJSONEmail = JSON.stringify(response.data);
+        let parseJSONEmail = JSON.parse(valueJSONEmail);
+        setEmailWorker(parseJSONEmail.email);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const getName = () => {
-     axios
+    axios
       .post("http://localhost:8081/worker/getNameById", {
         id: idInput,
       })
@@ -67,6 +84,7 @@ function AllCarOfWorker() {
   useEffect(() => {
     getCar();
     getName();
+    getEmail();
   }, []);
 
   return (
@@ -122,7 +140,11 @@ function AllCarOfWorker() {
                           variant="contained"
                           onClick={() =>
                             navigate("/changeVisibilty", {
-                              state: { idCar: car.id, isRental: car.rental, idWorker: location.state.idWorker },
+                              state: {
+                                idCar: car.id,
+                                isRental: car.rental,
+                                idWorker: location.state.idWorker,
+                              },
                             })
                           }
                         >
@@ -136,7 +158,41 @@ function AllCarOfWorker() {
             )}
           </Table>
         </TableContainer>
-      </div>
+          <Box
+            margin={2}
+          >
+          <Grid container justifyContent={"flex-end"}>
+            <Grid item>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() =>
+                  navigate("/indexWorker", {
+                    state: { email: emailWorker },
+                  })
+                }
+              >
+                Back to home {name}
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid container justifyContent={"flex-end"}>
+            <Grid item>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() =>
+                  navigate("/addcar", {
+                    state: { idWorker: location.state.idWorker },
+                  })
+                }
+              >
+                Add car
+              </Button>
+            </Grid>
+          </Grid>
+          </Box>
+        </div>
     </>
   );
 }

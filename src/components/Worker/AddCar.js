@@ -27,8 +27,8 @@ function AddCar() {
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
   const [annoProduzione, setAnnoProduzione] = useState(new Date(date));
-  const [date_available_finish, setAvalableFinish] = useState(new Date());
-  const [date_available_start, setAvalableStart] = useState(new Date());
+  const [date_available_finish, setAvalableFinish] = useState(new Date(date));
+  const [date_available_start, setAvalableStart] = useState(new Date(date));
   const [model, setModel] = useState("");
   const [moneyDaily, setMoneyDaily] = useState(0.0);
   const [numberCar, setNumberCar] = useState("");
@@ -230,6 +230,8 @@ function AddCar() {
                     onChange={(event) => {
                       setAnnoProduzione(event)
                     }}
+                    maxDate={today}
+                    disableFuture
                     required
                   />
                   <DatePicker
@@ -239,6 +241,7 @@ function AddCar() {
                     onChange={(event) => {
                       setAvalableStart(event);
                     }}
+                    minDate={today}
                     required
                   />
                   <DatePicker
@@ -248,6 +251,7 @@ function AddCar() {
                     onChange={(event) => {
                       setAvalableFinish(event);
                     }}
+                    minDate={date_available_start}
                     required
                   />
                 </Stack>
@@ -264,7 +268,7 @@ function AddCar() {
             <Grid container justifyContent={"flex-end"}>
               <Grid item>
                 <Button onClick={() => navigate("/allcarofworker", {
-                                        state: { idWorker: idInput }
+                                        state: { idWorker: location.state.idWorker }
                                       })
                                 }
                 >
