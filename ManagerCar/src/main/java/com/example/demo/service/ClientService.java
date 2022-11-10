@@ -85,9 +85,18 @@ public class ClientService {
 				}
 				else {
 					c.setDoor(d);
+					dr.save(d);
 					return d.getNumberDoor();
 				}
 			}
+		} catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public Client byObjectGetId(long id) {
+		try {
+			return cr.byObjectGetId(id);
 		} catch(Exception e) {
 			return null;
 		}

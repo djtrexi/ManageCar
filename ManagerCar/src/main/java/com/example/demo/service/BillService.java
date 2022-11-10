@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Bill;
+import com.example.demo.model.Car;
 import com.example.demo.model.Client;
 import com.example.demo.model.Door;
 import com.example.demo.model.Worker;
 import com.example.demo.repository.BillRepository;
+import com.example.demo.repository.CarRepository;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.DoorRepository;
 import com.example.demo.repository.WorkerRepository;
@@ -24,7 +26,7 @@ public class BillService {
 
 	@Autowired
 	DoorRepository dr;
-	
+
 	@Autowired
 	ClientRepository crl;
 
@@ -50,8 +52,7 @@ public class BillService {
 					return null;
 				}
 				else {
-					long idDoor = wr.getIdDoorByIdWorker(idWorker);
-					Door d = dr.getReferenceById(idDoor);
+					Door d = dr.getObjectWithId(w.getDoor().getId());
 					if(d == null) {
 						return null;
 					}
@@ -62,7 +63,7 @@ public class BillService {
 							return null;
 						}
 						else {
-							d.setAvailable(false);
+							d.setAvailable(true);
 							w.setDoor(null);
 							b.setDone(true);
 							b.setPay(true);
@@ -73,11 +74,36 @@ public class BillService {
 							br.save(b);
 							return true;							
 						}
+						
 					}
 				}
 			}
 		} catch(Exception e) {
 			return null;
+		}
+	}
+
+	public List<Bill> billNotFinish(){
+		try {
+			return br.billNotFinish();
+		} catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public int totBillCashForDeterminedWorker(long idWorker) {
+		try {
+			return br.totBillCashForDeterminedWorker(idWorker);
+		} catch(Exception e) {
+			return -1;
+		}
+	}
+	
+	public long getIdByIdClientAndIdWorker(long idClient, long idWorker) {
+		try {
+			return br.getIdByIdClientAndIdWorker(idClient, idWorker);
+		} catch(Exception e) {
+			return 0;
 		}
 	}
 }

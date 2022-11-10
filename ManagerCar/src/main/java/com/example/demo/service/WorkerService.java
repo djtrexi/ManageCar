@@ -1,9 +1,13 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Door;
 import com.example.demo.model.Worker;
+import com.example.demo.repository.DoorRepository;
 import com.example.demo.repository.WorkerRepository;
 
 @Service
@@ -11,6 +15,9 @@ public class WorkerService {
 	@Autowired
 	WorkerRepository wr;
 
+	@Autowired
+	DoorRepository dr;
+	
 	public Worker loginWorker(String email, String password, String codWorker) {
 		try {
 			if(wr.loginWorker(email, password, codWorker) == null) {
@@ -86,6 +93,32 @@ public class WorkerService {
 			}
 			else {
 				return wr.getEmailById(id);
+			}
+		} catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public Worker getObjectById(long id) {
+		try {
+			return wr.getObjectById(id);
+		} catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public Boolean setDoorForWorkWorker() {
+		try {
+			if(wr.searchWorkerFree() == null || dr.getDoorAvailable() == null) {
+				return null;
+			}
+			else {
+				List<Worker> workers = wr.searchWorkerFree();
+				List<Door> doors = dr.getDoorAvailable();
+				
+				workers.get(0).setDoor(doors.get(0));
+				wr.save(workers.get(0));
+				return true;
 			}
 		} catch(Exception e) {
 			return null;

@@ -48,14 +48,19 @@ public class CarService {
 				}
 				else {
 					Car car = cr.getCarById(idCar);
-					car.setDateRentalStart(dataBegin);
-					car.setDateRentalFinish(dataFinish);
-					car.setAvailable(false);
-					car.setRental(true);
-					Client c = crl.getReferenceById(idClient);
-					car.setClient(c);
-					cr.save(car);
-					return true;
+					if(car.getDateAvalableFinish().isBefore(dataBegin) || car.getDateAvalableFinish().isBefore(dataFinish)) {
+						return false;
+					}
+					else {
+						car.setDateRentalStart(dataBegin);
+						car.setDateRentalFinish(dataFinish);
+						car.setAvailable(false);
+						car.setRental(true);
+						Client c = crl.getReferenceById(idClient);
+						car.setClient(c);
+						cr.save(car);
+						return true;
+					}
 				}
 			}
 		} catch(Exception e) {
@@ -95,7 +100,7 @@ public class CarService {
 			return null;
 		}
 	}
-	
+
 	public Boolean changeVisibilityCar(long id) {
 		try {
 			if(cr.existsById(id)) {
@@ -129,7 +134,7 @@ public class CarService {
 				else {
 					car.setDateAvalableStart(dateAvailableStart);
 					car.setDateAvalableFinish(dateAvailableFinish);
-					if(car.getDateAvalableStart() == LocalDate.now()) {
+					if(car.getDateAvalableStart().equals(LocalDate.now())) {
 						car.setAvailable(true);
 					}
 					else {
@@ -138,7 +143,7 @@ public class CarService {
 					cr.save(car);
 					return true;
 				}
-				
+
 			}
 			else {
 				return null;
@@ -147,7 +152,7 @@ public class CarService {
 			return null;
 		}
 	}
-	
+
 	public Boolean deleteCar(long id) {
 		try {
 			if(cr.existsById(id)) {
@@ -202,13 +207,18 @@ public class CarService {
 							if(!typePay) {
 								Bill bCart = new Bill(totalMoneyRental, typePay, workers.get(0), c, car);
 								bCart.setPay(true);
+								bCart.setDone(true);
 								br.save(bCart);
 								return true;
 							}
 							else {
 								worker.setDoor(d);
+								c.setDoor(d);
 								Bill bCash = new Bill(totalMoneyRental, typePay, workers.get(0), c, car);
+								bCash.setDone(false);
+								bCash.setPay(false);
 								br.save(bCash);
+								crl.save(c);
 								wr.save(worker);
 								return false;
 							}
@@ -238,7 +248,6 @@ public class CarService {
 	}
 
 	public List<Car> viewCarOfWorker(long id){
-		System.out.println(id);
 		try {
 			if(wr.getReferenceById(id) == null) {
 				return null;
@@ -315,8 +324,8 @@ public class CarService {
 					return -1;
 				}
 				else {
-				  int totDifferenceDate = car.getDateRentalStart().compareTo(car.getDateRentalFinish());
-				  return totDifferenceDate;
+					int totDifferenceDate = car.getDateRentalFinish().compareTo(car.getDateRentalStart());
+					return totDifferenceDate;
 				}
 			}
 			else {
@@ -334,7 +343,7 @@ public class CarService {
 			return -1;
 		}
 	}
-	
+
 	public String getDateAvalableStartById(long id) {
 		try {
 			return cr.getDateAvalableStartById(id);
@@ -342,7 +351,7 @@ public class CarService {
 			return null;
 		}
 	}
-	
+
 	public String getdateAvalableFinishById(long id) {
 		try {
 			return cr.getdateAvalableFinishById(id);
