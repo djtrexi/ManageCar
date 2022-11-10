@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CarAvalible from "../Car/CarAvalible";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Box,
@@ -14,10 +14,12 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from "@mui/material";
 
 function Index() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [car, setCar] = useState([]);
   const [nameUser, setNameUser] = useState("");
@@ -35,7 +37,7 @@ function Index() {
             id: response.data.id,
           })
           .then((response) => {
-            setTotCarRental(response.data);
+            setTotCarRental(response.data.count);
             if (totCarRental.count === 0) {
               setTotCarRentalBoolean(false);
             } else {
@@ -93,8 +95,8 @@ function Index() {
   function tableTotCar() {
     return (
       <div>
-        <Typography variant="h4" color={"inherit"} component="div">
-          There is not cars accuty rental of {nameUser}
+        <Typography variant="h4" color={"inherit"} component="div" align="center">
+          There is not cars actually rental of {nameUser}
         </Typography>
       </div>
     );
@@ -112,8 +114,8 @@ function Index() {
             </Toolbar>
           </AppBar>
         </Box>
-        {!totCarRentalBoolean && tableTotCar()}
-        {totCarRentalBoolean && (
+        {totCarRentalBoolean && tableTotCar()}
+        {!totCarRentalBoolean && (
           <Box>
             <Typography
               variant="h4"
@@ -121,7 +123,7 @@ function Index() {
               component="div"
               align="center"
             >
-              Cars accutly rental of {nameUser}
+              Cars actually rental of {nameUser}
             </Typography>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">

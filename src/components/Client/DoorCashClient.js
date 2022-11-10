@@ -8,22 +8,37 @@ function DoorCashClient() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [idClient, setIdClient] = useState(0);
   const [numberDoor, setNumberDoor] = useState("");
-  
-  const getAndSetNumberDoor = async() => {
-    return await axios.post("http://localhost:8081/client/getIdByEmail", {
-      email: location.state.email,
-    }).then((response) => {
-      axios.put("http://localhost:8081/client/setDoorClient", {
-        id: response.data.id,
-      }).then((response) => {
-        setNumberDoor(response.data);
-      }).catch((err) => {
-        console.error(err);
+
+  const getAndSetNumberDoor = async () => {
+    return await axios
+      .post("http://localhost:8081/client/getIdByEmail", {
+        email: location.state.email,
       })
-    }).catch((err) => {
-      console.error(err);
-    })
+      .then((response) => {
+        setIdClient(response.data.id);
+        axios
+          .put("http://localhost:8081/worker/setDoorForWorkWorker")
+          .then((response) => {
+            axios
+              .put("http://localhost:8081/client/setDoorClient", {
+                id: idClient,
+              })
+              .then((response) => {
+                setNumberDoor(response.data);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   useEffect(() => {
@@ -57,7 +72,9 @@ function DoorCashClient() {
             variant="contained"
             fullWidth
             sx={{ mt: 3, mb: 2 }}
-            onClick={navigate('/')}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             Back to home
           </Button>
