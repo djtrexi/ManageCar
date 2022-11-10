@@ -39,11 +39,36 @@ public class Worker {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codDoor")
 	private Door door;
-	
+
 	@OneToMany(mappedBy = "worker")
 	private List<Bill> bills; 
 
 	public Worker() {}
+
+	public Worker(long id, String name, String surname, String email, String password, String codWorker, LocalTime startWork, LocalTime finishWork, boolean free, boolean work, List<Car> cars, Door door,List<Bill> bills) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.password = password;
+		this.codWorker = codWorker;
+		this.startWork = startWork;
+		this.finishWork = finishWork;
+		this.free = free;
+		this.work = work;
+		this.cars = cars;
+		this.door = door;
+		this.bills = bills;
+	}
+
+	public Worker(long id, String name, String surname, String email, String password, String codWorker) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.password = password;
+		this.codWorker = codWorker;
+	}
 
 	public long getId() {
 		return id;

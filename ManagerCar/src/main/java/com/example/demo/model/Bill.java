@@ -39,8 +39,7 @@ public class Bill {
 	
 	public Bill() {}
 
-	public Bill(long id, String description, boolean done, double totalMoneyRental, boolean typePay, boolean pay,
-			Worker worker, Client client, Car car) {
+	public Bill(long id, String description, boolean done, double totalMoneyRental, boolean typePay, boolean pay, Worker worker, Client client, Car car) {
 		this.id = id;
 		this.description = description;
 		this.done = done;
