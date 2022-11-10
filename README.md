@@ -32,7 +32,6 @@ I have divided the project into several task:
   > Create the Diagrams:
   > - UML
   > - E-R
-  ![Screenshot_20221105_114816](https://user-images.githubusercontent.com/57871388/200616358-452a4b98-a811-48f5-87da-2e1865bac199.png)
 
 - Fourth task
   > Create the repository on git
