@@ -107,7 +107,15 @@ public class CarAddRequest {
 		if(model.equals("") || brand.equals("") || color.equals("") || numberCar.equals("")) {
 			return false;
 		}
-		else if(annoProduzione == null || dateAvalableFinish == null || dateAvalableStart == null || annoProduzione.isAfter(dateAvalableFinish) || annoProduzione.isAfter(dateAvalableFinish) || dateAvalableFinish.isBefore(dateAvalableStart) || dateAvalableStart.isAfter(dateAvalableFinish)) {
+		else if(annoProduzione == null || 
+				dateAvalableFinish == null || 
+				dateAvalableStart == null || 
+				annoProduzione.isAfter(dateAvalableFinish) || 
+				annoProduzione.isAfter(dateAvalableFinish) || 
+				dateAvalableFinish.isBefore(dateAvalableStart) || 
+				dateAvalableStart.isAfter(dateAvalableFinish) ||
+				dateAvalableStart.isBefore(LocalDate.now()) ||
+				dateAvalableFinish.isBefore(LocalDate.now())) {
 			return false;
 		}
 		else {
