@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -40,9 +40,9 @@ function IndexWorker() {
       });
   }
 
-  const countBillForWorker = async () => {
+  const countBillForWorker = () => {
     getName();
-    return await axios
+    axios
       .post("http://localhost:8081/worker/getIdByEmail", {
         email: location.state.email,
       })
@@ -52,7 +52,9 @@ function IndexWorker() {
             id: response.data.id,
           })
           .then((response) => {
-            setTotBill(response.data);
+            let valueJSON = JSON.stringify(response.data);
+            let parseJSON = JSON.parse(valueJSON);
+            setTotBill(parseJSON.tot);
             if (totBill === 0) {
               setTotBillBoolean(false);
             } else {
@@ -74,7 +76,7 @@ function IndexWorker() {
         <Button
           sx={{ mt: 2 }}
           variant="contained"
-          onClick={() => navigate("/finishpayment")}
+          onClick={() => navigate("/finishpayment", {state: {email: location.state.email}})}
         >
           Show bills
         </Button>
@@ -82,12 +84,12 @@ function IndexWorker() {
     );
   }
 
-  useEffect(() => {
-    countBillForWorker();
-  }, []);
+  countBillForWorker();
+
 
   return (
     <div>
+      
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar variant="dense">
