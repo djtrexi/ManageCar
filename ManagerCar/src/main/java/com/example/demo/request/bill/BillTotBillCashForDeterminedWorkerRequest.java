@@ -2,12 +2,12 @@ package com.example.demo.request.bill;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class BillGetBillByIdWorkerRequest {
+public class BillTotBillCashForDeterminedWorkerRequest {
 	private long id;
 
-	public BillGetBillByIdWorkerRequest() {}
+	public BillTotBillCashForDeterminedWorkerRequest() {}
 
-	public BillGetBillByIdWorkerRequest(long id) {
+	public BillTotBillCashForDeterminedWorkerRequest(long id) {
 		this.id = id;
 	}
 

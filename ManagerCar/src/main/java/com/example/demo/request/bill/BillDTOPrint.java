@@ -1,30 +1,18 @@
 package com.example.demo.request.bill;
 
-import com.example.demo.model.Bill;
-import com.example.demo.model.Car;
-import com.example.demo.model.Client;
-import com.example.demo.model.Worker;
-
 public class BillDTOPrint {
 	private long id;
-	private Worker worker;
-	private Client client;
-	private Car car;
+	private long idWorker;
+	private long idClient;
+	private long idCar;
 
 	public BillDTOPrint() {}
 
-	public BillDTOPrint(Bill b) {
-		id = b.getId();
-		worker = b.getWorker();
-		client = b.getClient();
-		car = b.getCar();
-	}
-
-	public BillDTOPrint(long id, Worker worker, Client client, Car car) {
+	public BillDTOPrint(long id, long idWorker, long idClient, long idCar) {
 		this.id = id;
-		this.worker = worker;
-		this.client = client;
-		this.car = car;
+		this.idWorker = idWorker;
+		this.idClient = idClient;
+		this.idCar = idCar;
 	}
 
 	public long getId() {
@@ -35,27 +23,27 @@ public class BillDTOPrint {
 		this.id = id;
 	}
 
-	public Worker getWorker() {
-		return worker;
+	public long getIdWorker() {
+		return idWorker;
 	}
 
-	public void setWorker(Worker worker) {
-		this.worker = worker;
+	public void setIdWorker(long idWorker) {
+		this.idWorker = idWorker;
 	}
 
-	public Client getClient() {
-		return client;
+	public long getIdClient() {
+		return idClient;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setIdClient(long idClient) {
+		this.idClient = idClient;
 	}
 
-	public Car getCar() {
-		return car;
+	public long getIdCar() {
+		return idCar;
 	}
 
-	public void setCar(Car car) {
-		this.car = car;
+	public void setIdCar(long idCar) {
+		this.idCar = idCar;
 	}
 }
