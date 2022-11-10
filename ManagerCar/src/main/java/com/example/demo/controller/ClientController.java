@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Client;
+import com.example.demo.request.client.ClientByObjectGetIdRequest;
 import com.example.demo.request.client.ClientGetIdByEmailRequest;
 import com.example.demo.request.client.ClientGetNameByEmailRequest;
 import com.example.demo.request.client.ClientLoginRentalRequest;
 import com.example.demo.request.client.ClientSetDoorClientRequest;
 import com.example.demo.request.client.ClientSignRequest;
 import com.example.demo.response.car.ClientGetNameByEmailResponse;
+import com.example.demo.response.client.ClientByObjectGetIdResponse;
 import com.example.demo.response.client.ClientGetIdByEmailResponse;
 import com.example.demo.response.client.ClientLoginRentalResponse;
 import com.example.demo.response.client.ClientSetDoorClientResponse;
@@ -110,6 +112,22 @@ public class ClientController {
 			else {
 				String numberDoor = serviceClient.setDoorClient(request.getId());
 				return ResponseEntity.status(HttpStatus.OK).body(new ClientSetDoorClientResponse(numberDoor));
+			}
+		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.POST, path = "/byObjectGetId")
+	public ResponseEntity<ClientByObjectGetIdResponse> byObjectGetId(@RequestBody ClientByObjectGetIdRequest request){
+		if(!request.isValid()) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		else {
+			if(serviceClient.byObjectGetId(request.getId()) == null) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.OK).body(new ClientByObjectGetIdResponse(serviceClient.byObjectGetId(request.getId())));
 			}
 		}
 	}

@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Bill;
 import com.example.demo.request.bill.BillFinishThePaymentRequest;
 import com.example.demo.request.bill.BillGetBillByIdWorkerRequest;
-import com.example.demo.request.bill.BillPrintResponse;
+import com.example.demo.request.bill.BillGetIdByIdClientAndIdWorkerRequest;
+import com.example.demo.request.bill.BillTotBillCashForDeterminedWorkerRequest;
+import com.example.demo.response.bill.BillGetIdByIdClientAndIdWorkerResponse;
+import com.example.demo.response.bill.BillPrintResponse;
+import com.example.demo.response.bill.BillTotBillCashForDeterminedWorkerResponse;
 import com.example.demo.service.BillService;
 
 @RestController
@@ -41,7 +45,7 @@ public class BillController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(method = RequestMethod.POST, path = "/finishThePayment")
+	@RequestMapping(method = RequestMethod.PUT, path = "/finishThePayment")
 	public ResponseEntity finishThePayment(@RequestBody BillFinishThePaymentRequest request) {
 		if(!request.isValid()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -54,5 +58,49 @@ public class BillController {
 				return ResponseEntity.status(HttpStatus.OK).build();
 			}
 		}
+	}
+
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.GET, path = "/billNotFinish")
+	public ResponseEntity<BillPrintResponse> billNotFinish() {
+		List<Bill> bills = serviceBill.billNotFinish();
+		if(bills == null) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.OK).body(new BillPrintResponse(bills));
+		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.POST, path = "/totBillCashForDeterminedWorker")
+	public ResponseEntity<BillTotBillCashForDeterminedWorkerResponse> totBillCashForDeterminedWorker(@RequestBody BillTotBillCashForDeterminedWorkerRequest request){
+		if(!request.isValid()) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+		else {
+			if(serviceBill.totBillCashForDeterminedWorker(request.getId()) == -1) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.OK).body(new BillTotBillCashForDeterminedWorkerResponse(serviceBill.totBillCashForDeterminedWorker(request.getId())));
+			}
+		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.POST, path = "/getIdByIdClientAndIdWorker")
+	public ResponseEntity<BillGetIdByIdClientAndIdWorkerResponse> getIdByIdClientAndIdWorker(@RequestBody BillGetIdByIdClientAndIdWorkerRequest request) {
+	  if(!request.isValid()) {
+		  return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+	  }
+	  else {
+		  if(serviceBill.getIdByIdClientAndIdWorker(request.getIdClient(), request.getIdWorker()) == 0) {
+			  return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		  }
+		  else {
+			  return ResponseEntity.status(HttpStatus.OK).body(new BillGetIdByIdClientAndIdWorkerResponse(serviceBill.getIdByIdClientAndIdWorker(request.getIdClient(), request.getIdWorker())));
+		  }
+	  }
 	}
 }
