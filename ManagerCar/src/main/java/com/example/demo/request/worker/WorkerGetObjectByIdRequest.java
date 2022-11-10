@@ -2,12 +2,12 @@ package com.example.demo.request.worker;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class WorkerGetEmailByIdRequest {
+public class WorkerGetObjectByIdRequest {
 	private long id;
 
-	public WorkerGetEmailByIdRequest() {}
+	public WorkerGetObjectByIdRequest() {}
 
-	public WorkerGetEmailByIdRequest(long id) {
+	public WorkerGetObjectByIdRequest(long id) {
 		this.id = id;
 	}
 
