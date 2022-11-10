@@ -8,13 +8,16 @@ function DoorCashClient() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const objEmailUser = location.state.email;
+  let email  = String(Object.values(objEmailUser)[0]);
+  
   const [idClient, setIdClient] = useState(0);
   const [numberDoor, setNumberDoor] = useState("");
 
-  const getAndSetNumberDoor = async () => {
-    return await axios
+  const getAndSetNumberDoor =  () => {
+    axios
       .post("http://localhost:8081/client/getIdByEmail", {
-        email: location.state.email,
+        email: email,
       })
       .then((response) => {
         setIdClient(response.data.id);
@@ -26,7 +29,9 @@ function DoorCashClient() {
                 id: idClient,
               })
               .then((response) => {
-                setNumberDoor(response.data);
+                let valueJSON = JSON.stringify(response.data);
+                let parseJSON = JSON.parse(valueJSON);    
+                setNumberDoor(parseJSON.numberDoor);
               })
               .catch((err) => {
                 console.error(err);
@@ -41,9 +46,9 @@ function DoorCashClient() {
       });
   };
 
-  useEffect(() => {
+  
     getAndSetNumberDoor();
-  }, []);
+
 
   return (
     <div>
@@ -66,7 +71,7 @@ function DoorCashClient() {
           }}
         >
           <Typography variant="subtitle1" component={"div"}>
-            You must go at door number {numberDoor}
+            You must go at door number <>{numberDoor}</>
           </Typography>
           <Button
             variant="contained"

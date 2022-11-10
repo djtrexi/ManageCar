@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CarAvalible from "../Car/CarAvalible";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import {
   Box,
@@ -14,12 +14,10 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
 } from "@mui/material";
 
 function Index() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [car, setCar] = useState([]);
   const [nameUser, setNameUser] = useState("");
@@ -114,8 +112,8 @@ function Index() {
             </Toolbar>
           </AppBar>
         </Box>
-        {totCarRentalBoolean && tableTotCar()}
-        {!totCarRentalBoolean && (
+        {!totCarRentalBoolean && tableTotCar()}
+        {totCarRentalBoolean && (
           <Box>
             <Typography
               variant="h4"
