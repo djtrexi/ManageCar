@@ -28,9 +28,12 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
 	@Query("SELECT w.email FROM Worker w WHERE w.id = ?1")
 	public String getEmailById(long id);
 	
-	@Query("SELECT w FROM Worker w WHERE w.work = true AND w.free = true AND w.door.id IS NOT NULL")
+	@Query("SELECT w FROM Worker w WHERE w.work = true AND w.free = true AND w.door.id IS NULL")
 	public List<Worker> searchWorkerFree();
 	
 	@Query("SELECT w.door.id FROM Worker w WHERE w.id = ?1")
 	public long getIdDoorByIdWorker(long id);
+	
+	@Query("SELECT w FROM Worker w WHERE w.id = ?1")
+	public Worker getObjectById(long id);
 }
