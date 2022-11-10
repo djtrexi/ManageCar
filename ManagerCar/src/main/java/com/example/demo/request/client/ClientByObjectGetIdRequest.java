@@ -2,12 +2,12 @@ package com.example.demo.request.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class ClientSetDoorClientRequest {
+public class ClientByObjectGetIdRequest {
 	private long id;
 
-	public ClientSetDoorClientRequest() {}
+	public ClientByObjectGetIdRequest() {}
 
-	public ClientSetDoorClientRequest(long id) {
+	public ClientByObjectGetIdRequest(long id) {
 		this.id = id;
 	}
 
