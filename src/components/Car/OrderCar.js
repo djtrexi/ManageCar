@@ -24,9 +24,6 @@ function OrderCar() {
   const [totPay, setTotPay] = useState(0);
   const [typePay, setTypePay] = useState("");
   const [booleanTypePay, setBooleanTypePay] = useState(false);
-/*
-  const objIdCar = location.state.idCar;
-  let idCar = Number(Object.values(objIdCar)[0]);*/
 
   const differenceDate = () => {
     axios
@@ -62,15 +59,15 @@ function OrderCar() {
 
   const handleTypePay = (event) => {
     setTypePay(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (typePay === "cash") {
+    if (event.target.value === "cash") {
       setBooleanTypePay(true);
     } else {
       setBooleanTypePay(false);
     }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     axios
       .post("http://localhost:8081/car/updatePayment", {
         id: location.state.idCar,
@@ -80,7 +77,9 @@ function OrderCar() {
       .then((response) => {
         if (booleanTypePay) {
           navigate("/doorCashClient", {
-            state: { email: location.state.email },
+            state: {
+              email: location.state.email,
+            },
           });
         } else {
           navigate("/finishOrder");

@@ -111,16 +111,16 @@ function CarAvalible(props) {
                         <TableCell align="center">
                           <div>{car.model}</div>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                           <div>{car.brand}</div>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                           <div>{car.color}</div>
                         </TableCell>
                         <TableCell>
                           <div>{car.moneyDaily}</div>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align="center">
                           <Button
                             variant="contained"
                             onClick={() =>
