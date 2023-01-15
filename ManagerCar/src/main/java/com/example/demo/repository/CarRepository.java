@@ -62,6 +62,6 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	@Query("SELECT c.dateAvalableStart FROM Car c WHERE c.id = ?1")
 	public String getDateAvalableStartById(long id);
 	
-	@Query("SELECT c,dateAvalableFinish FROM Car c WHERE c.id = ?1")
+	@Query("SELECT c.dateAvalableFinish FROM Car c WHERE c.id = ?1")
 	public String getdateAvalableFinishById(long id);
 }
